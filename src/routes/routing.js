@@ -1,4 +1,10 @@
 import Layout from "layout";
+import Detail from "pages/detail";
+import Main from "pages/main";
+import NowPlaying from "pages/now-playing";
+import Search from "pages/search";
+import TopRated from "pages/top-rated";
+import Upcoming from "pages/upcoming";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -6,18 +12,36 @@ const router = createBrowserRouter([
 		element: <Layout />,
 		children: [
 			{
+				path: "/search",
+				element: <Search />,
+			},
+			{
+				path: "movie/:movieId",
+				element: <Detail />,
+			},
+			{
 				path: "/",
-				element: <div>:)</div>,
-				children: [
-					{
-						path: "main",
-						elememt: <div>main page</div>,
-					},
-					{
-						path: "detail",
-						elememt: <div>detail page</div>,
-					},
-				],
+				element: <Main />,
+			},
+			{
+				path: "movies/",
+				element: <Main />,
+			},
+			{
+				path: "movies/popular",
+				element: <Main />,
+			},
+			{
+				path: "movies/now-playing",
+				element: <NowPlaying />,
+			},
+			{
+				path: "movies/upcoming",
+				element: <Upcoming />,
+			},
+			{
+				path: "movies/top-rated",
+				element: <TopRated />,
 			},
 		],
 	},
