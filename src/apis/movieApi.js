@@ -1,6 +1,6 @@
 // movieApi.js
 import { axiosInstance } from "./@core";
-import { useQuery} from "react-query";
+import { useQuery } from "react-query";
 
 const apiConfig = {
 	language: "ko-KR",
@@ -58,5 +58,3 @@ export const CacheUtils = {
 		);
 	},
 };
-
-

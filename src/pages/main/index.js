@@ -14,7 +14,7 @@ const Main = () => {
 
 	// 캐시하기
 	CacheUtils.cachePopularMovie(1);
-	
+
 	CacheUtils.cacheTopRatedMovie(1);
 
 	const getPopularMovie = () => {
