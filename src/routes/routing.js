@@ -1,5 +1,5 @@
 import Layout from "layout";
-import Detail from "pages/detail";
+import DetailPage from "pages/detail";
 import Main from "pages/main";
 import NowPlaying from "pages/now-playing";
 import Search from "pages/search";
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "movies/detail",
-				element: <Detail />,
+				element: <DetailPage />,
 			},
 			{
 				path: "/",
