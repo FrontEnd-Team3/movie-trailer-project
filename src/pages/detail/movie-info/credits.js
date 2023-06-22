@@ -30,6 +30,22 @@ const Credits = ({ id }) => {
 		getCredits(id);
 	}, []);
 
+	//배우
+	let FirstCast;
+	let SecondCast;
+	if (creditData && creditData.cast && creditData.cast.length >= 1) {
+		FirstCast = creditData.cast[0].name;
+	} else {
+		FirstCast = "unknown";
+	}
+
+	if (creditData && creditData.cast && creditData.cast.length >= 2) {
+		SecondCast = creditData.cast[1].name;
+	} else {
+		SecondCast = null;
+	}
+
+	// 제작진
 	let Director;
 	let Writer;
 
@@ -41,7 +57,7 @@ const Credits = ({ id }) => {
 			person => person.known_for_department === "Writing",
 		);
 	}
-
+	// 이름 없는 경우
 	if (Director && Director.name) {
 		Director = Director.name;
 	} else {
@@ -67,7 +83,7 @@ const Credits = ({ id }) => {
 				</Container>
 				<Container>
 					<Title>Top Cast</Title>
-					{creditData.cast[0].name}, {creditData.cast[1].name}
+					{FirstCast}, {SecondCast && SecondCast}
 				</Container>
 			</>
 		)
