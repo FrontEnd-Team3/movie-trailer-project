@@ -4,9 +4,9 @@ import { CacheUtils } from "apis/movieApi";
 import MovieList from "components/movie-list";
 
 const Main = () => {
+	const navigate = useNavigate();
 	useEffect(() => {
 		if (location.pathname !== "/movies/popular") {
-			const navigate = useNavigate();
 			navigate("/movies/popular");
 			// 캐시하기
 		}
@@ -16,8 +16,13 @@ const Main = () => {
 	CacheUtils.cacheTopRatedMovie(1);
 
 	// 사용법
-	const cachedPopularMovies = CacheUtils.cachePopularMovie().data;
-	const popularMovies = cachedPopularMovies.data || null;
+	let popularMovies;
+	const cachedPopularMovies = CacheUtils.cachePopularMovie();
+	console.log("cached", cachedPopularMovies);
+	if (!cachedPopularMovies.data) popularMovies = [];
+	else {
+		popularMovies = cachedPopularMovies.data.data.results;
+	}
 	console.log(popularMovies);
 	return popularMovies && <MovieList movies={popularMovies} />;
 };

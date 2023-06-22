@@ -11,7 +11,12 @@ const TopRated = () => {
 	// CacheUtils.cacheTopRatedMovie(1);
 
 	// 사용법
-	const topRatedMovies = CacheUtils.cacheTopRatedMovie().data.data;
+	let topRatedMovies;
+	const cachedTopRatedMovies = CacheUtils.cacheTopRatedMovie();
+	if (!cachedTopRatedMovies.data) topRatedMovies = [];
+	else {
+		topRatedMovies = cachedTopRatedMovies.data.data.results;
+	}
 	console.log(topRatedMovies);
 	return topRatedMovies && <MovieList movies={topRatedMovies} />;
 };

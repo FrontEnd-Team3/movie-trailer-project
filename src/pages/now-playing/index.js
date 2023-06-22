@@ -6,7 +6,12 @@ const NowPlaying = () => {
 	// CacheUtils.cacheNowPlayingMovie(1);
 
 	// 사용법
-	const nowPlayingMovies = CacheUtils.cacheNowPlayingMovie().data.data;
+	let nowPlayingMovies;
+	const cachedNowPlayingMovies = CacheUtils.cacheNowPlayingMovie();
+	if (!cachedNowPlayingMovies.data) nowPlayingMovies = [];
+	else {
+		nowPlayingMovies = cachedNowPlayingMovies.data.data.results;
+	}
 	console.log(nowPlayingMovies);
 	return nowPlayingMovies && <MovieList movies={nowPlayingMovies} />;
 };
