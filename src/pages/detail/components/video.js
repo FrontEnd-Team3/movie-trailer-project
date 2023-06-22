@@ -26,9 +26,11 @@ const Video = ({ id }) => {
 	}, []);
 
 	return (
-		<VideoContainer>
-			<VideoPlayer src={videoLink} allowFullScreen></VideoPlayer>
-		</VideoContainer>
+		videoLink && (
+			<VideoContainer>
+				<VideoPlayer src={videoLink} allowFullScreen></VideoPlayer>
+			</VideoContainer>
+		)
 	);
 };
 
