@@ -43,7 +43,7 @@ const Gallery = ({ id }) => {
 		if (images.posters.length > 100) {
 			Image3 = BaseURL + images.posters[100].file_path;
 		} else {
-			Image3 = BaseURL + images.posters[1].file_path;
+			Image3 = BaseURL + images.posters[0].file_path;
 		}
 	} else {
 		Image3 = null;
@@ -114,6 +114,6 @@ const NoImage = styled.div`
 	height: 180px;
 	background-color: gray;
 	text-align: center;
-	padding-left: 5px;
+	padding-left: 10px;
 	padding-top: 80px;
 `;
