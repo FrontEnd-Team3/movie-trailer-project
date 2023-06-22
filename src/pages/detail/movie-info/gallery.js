@@ -1,20 +1,71 @@
-import Image1 from "../img/image 4.png";
-import Image2 from "../img/image 2.png";
-import Image3 from "../img/img.jpg";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { axiosInstance } from "apis/@core";
 
-const Gallery = () => {
+const Gallery = ({ id }) => {
+	/*
+		movie/{movie_id}/images
+        - file_path
+        - 가로형 1: backdrop[0]
+        - 세로형 2: posters[0], posters[1]
+	*/
+	const [images, setImages] = useState(null);
+	const BaseURL = "https://image.tmdb.org/t/p/w500";
+	let Image1;
+	let Image2;
+	let Image3;
+
+	const getImages = async movie_id => {
+		const res = await axiosInstance.get(`/movie/${movie_id}/images`, {
+			params: { api_key: process.env.REACT_APP_TOKEN },
+		});
+		console.log("images", res.data);
+		setImages(res.data);
+	};
+
+	useEffect(() => {
+		getImages(id);
+	}, []);
+
+	if (images && images.backdrops.length) {
+		Image1 = BaseURL + images.backdrops[0].file_path;
+	} else {
+		Image1 = null;
+	}
+
+	if (images && images.logos.length) {
+		Image2 = BaseURL + images.logos[0].file_path;
+	} else {
+		Image2 = null;
+	}
+
+	if (images && images.posters.length) {
+		if (images.posters.length > 100) {
+			Image3 = BaseURL + images.posters[100].file_path;
+		} else {
+			Image3 = BaseURL + images.posters[1].file_path;
+		}
+	} else {
+		Image3 = null;
+	}
+
 	return (
-		<MovieGallery>
-			<Title>Gallery</Title>
-			<div>
-				<TopImage src={Image1} />
-			</div>
-			<GalleryBottom>
-				<BottomImage src={Image2} />
-				<BottomImage src={Image3} />
-			</GalleryBottom>
-		</MovieGallery>
+		images && (
+			<MovieGallery>
+				<Title>Gallery</Title>
+				<div>
+					{Image1 ? (
+						<TopImage src={Image1} />
+					) : (
+						<NoBackdropImage>No Image</NoBackdropImage>
+					)}
+				</div>
+				<GalleryBottom>
+					{Image2 ? <BottomImage src={Image2} /> : <NoImage>No Image</NoImage>}
+					{Image3 ? <BottomImage src={Image3} /> : <NoImage>No Image</NoImage>}
+				</GalleryBottom>
+			</MovieGallery>
+		)
 	);
 };
 
@@ -48,4 +99,21 @@ const GalleryBottom = styled.div`
 const BottomImage = styled.img`
 	width: 140px;
 	height: 180px;
+`;
+
+const NoBackdropImage = styled.div`
+	width: 300px;
+	height: 160px;
+	background-color: gray;
+	text-align: center;
+	padding-left: 9px;
+	padding-top: 70px;
+`;
+const NoImage = styled.div`
+	width: 140px;
+	height: 180px;
+	background-color: gray;
+	text-align: center;
+	padding-left: 5px;
+	padding-top: 80px;
 `;

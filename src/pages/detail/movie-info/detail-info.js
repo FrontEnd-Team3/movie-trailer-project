@@ -1,22 +1,38 @@
 const { default: styled } = require("styled-components");
 
-const DetailInfo = () => {
+const DetailInfo = ({ target }) => {
+	// 등급: adult? 19 : 15
+	// 제목: title
+	// 개봉년도: release_date.split("-")[0]
+	// 개봉국가: production_countries[0]["iso_3166_1"]
+	// 장르: genres -> map 돌리기
+	// 평점: vote_average (vote_count)
+	console.log("genres", target.genres);
 	return (
 		<>
 			<MovieDetailTop>
-				<MovieRate>15</MovieRate>
-				<MovieTitle>About Time</MovieTitle>
+				<MovieRate>{target.adult ? 19 : 15}</MovieRate>
+				<MovieTitle>{target.title}</MovieTitle>
 			</MovieDetailTop>
 			<MovieDetailMiddle>
-				<p>2013 | UK</p>
 				<p>
-					<MovieGenre>Comedy</MovieGenre>
+					<span>{target.release_date.split("-")[0]}</span> <span>|</span>
+					<span>{target.production_countries[0]["iso_3166_1"]}</span>
+				</p>
+				<p>
+					{/* <MovieGenre>Comedy</MovieGenre>
 					<MovieGenre>Drama</MovieGenre>
-					<MovieGenre>Fantasy</MovieGenre>
+					<MovieGenre>Fantasy</MovieGenre> */}
+					{target.genres.map((genre, i) => (
+						<MovieGenre key={i}>{genre.name}</MovieGenre>
+					))}
 				</p>
 			</MovieDetailMiddle>
 			<StarRating>
-				<p>★★★★★</p> <span>5.0(1500)</span>
+				<p>{"★".repeat(Math.floor(target.vote_average))}</p>
+				<span>
+					{target.vote_average}({target.vote_count})
+				</span>
 			</StarRating>
 		</>
 	);
@@ -42,8 +58,9 @@ const MovieRate = styled.span`
 
 const MovieTitle = styled.div`
 	font-weight: bold;
-	font-size: 32px;
-	margin-left: 20px;
+	font-size: 25px;
+	margin-left: 16px;
+	margin-top: 5px;
 `;
 
 const MovieDetailMiddle = styled.div`
@@ -53,6 +70,9 @@ const MovieDetailMiddle = styled.div`
 	line-height: 21px;
 	p {
 		display: flex;
+	}
+	span {
+		margin-right: 5px;
 	}
 `;
 
@@ -66,7 +86,7 @@ const MovieGenre = styled.span`
 `;
 
 const StarRating = styled.div`
-	font-size: 24px;
+	font-size: 16px;
 	color: #f09191;
 	margin-left: -5px;
 	display: flex;
@@ -76,6 +96,8 @@ const StarRating = styled.div`
 		margin-right: 10px;
 	}
 	span {
+		font-size: 24px;
 		line-height: 32px;
+		font-weight: 200;
 	}
 `;

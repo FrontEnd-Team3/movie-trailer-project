@@ -31,7 +31,7 @@ export const MovieApi = {
 
 	// /movie/{movie_id}
 	getMovieDetail(movie_id, params) {
-		return axiosInstance.get(`/movie/${movie_id}`, { params });
+		return axiosInstance.get(`/movie/${movie_id}`, { params, video: true });
 	},
 };
 
@@ -54,6 +54,13 @@ export const CacheUtils = {
 		return useQuery(
 			["get/top-rated"],
 			() => MovieApi.getTopRatedMovie({ ...apiConfig, page }),
+			queryConfig,
+		);
+	},
+	cacheMovieDetail: (movie_id, page) => {
+		return useQuery(
+			["get/movie-detail", movie_id],
+			() => MovieApi.getMovieDetail(movie_id, { ...apiConfig, page }),
 			queryConfig,
 		);
 	},
