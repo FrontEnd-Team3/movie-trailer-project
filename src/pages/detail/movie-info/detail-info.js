@@ -7,17 +7,31 @@ const DetailInfo = ({ target }) => {
 	// 개봉국가: production_countries[0]["iso_3166_1"]
 	// 장르: genres -> map 돌리기
 	// 평점: vote_average (vote_count)
-	console.log("genres", target.genres);
+	console.log("country", target.production_countries);
+
+	let ReleasedYear;
+	if (target.release_date) {
+		ReleasedYear = target.release_date.split("-")[0];
+	} else {
+		ReleasedYear = "unknown";
+	}
+
+	let ReleastedCountry;
+	if (target.production_countries.length) {
+		ReleastedCountry = target.production_countries[0]["iso_3166_1"];
+	} else {
+		ReleastedCountry = "unknown";
+	}
 	return (
 		<>
 			<MovieDetailTop>
 				<MovieRate>{target.adult ? 19 : 15}</MovieRate>
-				<MovieTitle>{target.title}</MovieTitle>
+				<MovieTitle>{target.title ? target.title : "unknown"}</MovieTitle>
 			</MovieDetailTop>
 			<MovieDetailMiddle>
 				<p>
-					<span>{target.release_date.split("-")[0]}</span> <span>|</span>
-					<span>{target.production_countries[0]["iso_3166_1"]}</span>
+					<span>{ReleasedYear}</span> <span>|</span>
+					<span>{ReleastedCountry}</span>
 				</p>
 				<p>
 					{/* <MovieGenre>Comedy</MovieGenre>
