@@ -5,19 +5,14 @@ import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
 	const navigate = useNavigate();
 
-	const onGoSearchPage = event => {
-		event.preventDefault();
-		navigate("/search");
-	};
-
 	return (
 		<div>
-			<S.Form onClick={onGoSearchPage}>
+			<S.Form>
 				<S.SearchInput
 					autocomplete="off"
 					placeholder="작품명을 검색해보세요."
 				/>
-				<S.SearchButton>
+				<S.SearchButton onClick={() => navigate("/search")}>
 					<FiSearch size={16} />
 				</S.SearchButton>
 			</S.Form>
