@@ -4,14 +4,18 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "styles/global";
 import theme from "styles/theme";
 import "./App.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
+	const queryClient = new QueryClient();
 	return (
 		<>
-			<ThemeProvider theme={theme}>
-				<GlobalStyles />
-				<RouterProvider router={router} />
-			</ThemeProvider>
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider theme={theme}>
+					<GlobalStyles />
+					<RouterProvider router={router} />
+				</ThemeProvider>
+			</QueryClientProvider>
 		</>
 	);
 }
