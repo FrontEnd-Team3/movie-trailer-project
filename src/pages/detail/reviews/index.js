@@ -1,28 +1,52 @@
 import styled from "styled-components";
 import OneReview from "./one-review";
+import { useEffect, useState } from "react";
+import { axiosInstance } from "apis/@core";
 
-const Reviews = () => {
-	const reviewList = [{ user: "aaa" }, { user: "aaa" }, { user: "aaa" }];
+const Reviews = ({ id }) => {
+	/*
+	movie/{movie_id}/reviews
+        - results 로 접근 후 map 돌리기 (뱌로 사용하지 않도록 주의)
+
+	*/
+	const [reviewList, setReviewList] = useState([]);
+
+	const getReviews = async movie_id => {
+		const res = await axiosInstance.get(`/movie/${movie_id}/reviews`, {
+			params: { api_key: process.env.REACT_APP_TOKEN },
+		});
+		// console.log("credit", res.data);
+		setReviewList(res.data.results);
+		// console.log("reviews", res.data);
+	};
+
+	useEffect(() => {
+		getReviews(id);
+	}, []);
 	return (
-		<ReviewsContainer>
+		<>
 			<ReviewsTop>
 				<Title>Reviews</Title>
-				<span>1500 +</span>
+				<span>{reviewList.length}</span>
 			</ReviewsTop>
-			<ReviewList>
-				{reviewList.map((review, i) => (
-					<OneReview key={i} review={review} />
-				))}
-			</ReviewList>
-		</ReviewsContainer>
+			{reviewList.length ? (
+				<ReviewListBox>
+					<button>{"<"}</button>
+					<button>{">"}</button>
+					<ReviewList>
+						{reviewList.map((review, i) => (
+							<OneReview key={i} review={review} />
+						))}
+					</ReviewList>
+				</ReviewListBox>
+			) : (
+				<NoReview>No Reviews</NoReview>
+			)}
+		</>
 	);
 };
 
 export default Reviews;
-
-const ReviewsContainer = styled.div`
-	margin-top: -100px;
-`;
 
 const ReviewsTop = styled.div`
 	display: flex;
@@ -35,9 +59,18 @@ const ReviewsTop = styled.div`
 	}
 `;
 
+const ReviewListBox = styled.div`
+	display: flex;
+	overflow: hidden;
+	button {
+		border: none;
+		background-color: white;
+	}
+`;
+
 const ReviewList = styled.div`
 	display: flex;
-	justify-content: space-around;
+	/* justify-content: space-around; */
 `;
 
 const Title = styled.div`
@@ -45,4 +78,10 @@ const Title = styled.div`
 	font-style: italic;
 	font-weight: 500;
 	margin-bottom: 20px;
+`;
+
+const NoReview = styled.div`
+	height: 247px;
+	color: darkgray;
+	margin-left: 20px;
 `;

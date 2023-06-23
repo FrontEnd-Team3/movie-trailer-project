@@ -1,11 +1,36 @@
 import styled from "styled-components";
-import Fakevideo from "../img/52f1ec75f384ab43dd5bbefd785c183b.gif";
+import { axiosInstance } from "apis/@core";
+import { useEffect, useState } from "react";
 
-const Video = () => {
+const Video = ({ id }) => {
+	// 1. Video
+	const [videoLink, setVideoLink] = useState(null);
+
+	const getVideo = async movie_id => {
+		const res = await axiosInstance.get(`/movie/${movie_id}/videos`, {
+			params: { api_key: process.env.REACT_APP_TOKEN },
+		});
+
+		const TrailerVideo = res.data.results.find(
+			video => video.name === "Official Trailer",
+		);
+
+		// console.log("video", TrailerVideo);
+		if (TrailerVideo && TrailerVideo.site === "YouTube") {
+			setVideoLink(`https://www.youtube.com/embed/${TrailerVideo.key}`);
+		}
+	};
+
+	useEffect(() => {
+		getVideo(id);
+	}, []);
+
 	return (
-		<VideoContainer>
-			<VideoPlayer src={Fakevideo} />
-		</VideoContainer>
+		videoLink && (
+			<VideoContainer>
+				<VideoPlayer src={videoLink} allowFullScreen></VideoPlayer>
+			</VideoContainer>
+		)
 	);
 };
 
@@ -16,8 +41,8 @@ const VideoContainer = styled.div`
 	padding: 43px 100px;
 `;
 
-// video 받아와지면 video로 바꾸기
-const VideoPlayer = styled.img`
+const VideoPlayer = styled.iframe`
 	width: 1120px;
 	margin-left: 110px;
+	height: 560px;
 `;
