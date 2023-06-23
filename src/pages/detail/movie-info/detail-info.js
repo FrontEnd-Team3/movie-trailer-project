@@ -63,6 +63,7 @@ const MovieDetailTop = styled.div`
 
 const MovieRate = styled.span`
 	background-color: #ffe5e5;
+	height: 35px;
 	font-size: 24px;
 	color: #646464;
 	font-weight: Semi bold;

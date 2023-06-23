@@ -59,11 +59,19 @@ const MultipleItems = ({ reviewList }) => {
 	};
 	return (
 		<S.ReviewSliderBox>
-			<Slider {...settings}>
-				{reviewList.map((review, i) => (
-					<OneReview key={i} review={review} />
-				))}
-			</Slider>
+			{reviewList.length >= 3 ? (
+				<Slider {...settings}>
+					{reviewList.map((review, i) => (
+						<OneReview key={i} review={review} />
+					))}
+				</Slider>
+			) : (
+				<ReviewContainer>
+					{reviewList.map((review, i) => (
+						<OneReview key={i} review={review} />
+					))}
+				</ReviewContainer>
+			)}
 		</S.ReviewSliderBox>
 	);
 };
@@ -74,4 +82,9 @@ const ReviewSliderBox = styled.div`
 	margin-left: 60px;
 `;
 
-const S = { ReviewSliderBox };
+const ReviewContainer = styled.div`
+	display: flex;
+	justify-content: center;
+`;
+
+const S = { ReviewSliderBox, ReviewContainer };
