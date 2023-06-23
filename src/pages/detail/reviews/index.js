@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import OneReview from "./one-review";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "apis/@core";
+import ReviewSlides from "./review-slide";
 
 const Reviews = ({ id }) => {
 	/*
@@ -23,6 +23,7 @@ const Reviews = ({ id }) => {
 	useEffect(() => {
 		getReviews(id);
 	}, []);
+
 	return (
 		<>
 			<ReviewsTop>
@@ -30,15 +31,7 @@ const Reviews = ({ id }) => {
 				<span>{reviewList.length}</span>
 			</ReviewsTop>
 			{reviewList.length ? (
-				<ReviewListBox>
-					<button>{"<"}</button>
-					<button>{">"}</button>
-					<ReviewList>
-						{reviewList.map((review, i) => (
-							<OneReview key={i} review={review} />
-						))}
-					</ReviewList>
-				</ReviewListBox>
+				<ReviewSlides reviewList={reviewList} />
 			) : (
 				<NoReview>No Reviews</NoReview>
 			)}

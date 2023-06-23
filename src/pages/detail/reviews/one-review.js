@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FakeProfile from "../img/9.jpg";
+import FakeProfile from "../img/FakeProfile.jpg";
 
 const OneReview = ({ review }) => {
 	/*
@@ -37,20 +37,18 @@ const OneReview = ({ review }) => {
 	}
 
 	return (
-		<>
-			<Review>
-				<ReviewTop>
-					<UserInfo>
-						<div>
-							<ProfileImage src={profileURL} />
-						</div>
-						<UserName>UserName</UserName>
-					</UserInfo>
-					<UserRate>★{UserRating}</UserRate>
-				</ReviewTop>
-				<ReviewContent>{review.content}</ReviewContent>
-			</Review>
-		</>
+		<Review>
+			<ReviewTop>
+				<UserInfo>
+					<div>
+						<ProfileImage src={profileURL} />
+					</div>
+					<UserName>UserName</UserName>
+				</UserInfo>
+				<UserRate>★{UserRating}</UserRate>
+			</ReviewTop>
+			<ReviewContent>{review.content}</ReviewContent>
+		</Review>
 	);
 };
 
