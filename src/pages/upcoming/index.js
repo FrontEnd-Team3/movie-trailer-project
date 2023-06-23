@@ -1,7 +1,14 @@
+import { CacheUtils } from "apis/movieApi";
 import MovieList from "components/movie-list";
 
 const Upcoming = () => {
-	const upcomingMovies = {}; // 대충 api 콜해오는 로직
-	return <MovieList movies={upcomingMovies} />;
+	let upComingMovies;
+	const cachesUpcomingMovies = CacheUtils.cacheUpcomingMovie();
+	if (!cachesUpcomingMovies.data) upComingMovies = [];
+	else {
+		upComingMovies = cachesUpcomingMovies.data.data.results;
+	}
+	console.log(upComingMovies);
+	return upComingMovies && <MovieList movies={upComingMovies} />;
 };
 export default Upcoming;

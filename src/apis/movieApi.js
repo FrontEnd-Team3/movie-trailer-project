@@ -33,6 +33,10 @@ export const MovieApi = {
 	getMovieDetail(movie_id, params) {
 		return axiosInstance.get(`/movie/${movie_id}`, { params, video: true });
 	},
+	// /movie/
+	getUpcoming(params) {
+		return axiosInstance.get(`/movie/upcoming`, { params });
+	},
 };
 
 export const CacheUtils = {
@@ -61,6 +65,13 @@ export const CacheUtils = {
 		return useQuery(
 			["get/movie-detail", movie_id],
 			() => MovieApi.getMovieDetail(movie_id, { ...apiConfig, page }),
+			queryConfig,
+		);
+	},
+	cacheUpcomingMovie: page => {
+		return useQuery(
+			["get/upcoming"],
+			() => MovieApi.getUpcoming({ ...apiConfig, page }),
 			queryConfig,
 		);
 	},
