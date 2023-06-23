@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 const Plot = ({ plot }) => {
 	return (
-		<Container>
-			<Title>Plot</Title>
-			<Overview>{plot ? plot : "No Plot"}</Overview>
-		</Container>
+		<S.Container>
+			<S.Title>Plot</S.Title>
+			<S.Overview>{plot ? plot : "No Plot"}</S.Overview>
+		</S.Container>
 	);
 };
 
@@ -28,3 +28,9 @@ const Overview = styled.div`
 	font-weight: 200;
 	line-height: 25px;
 `;
+
+const S = {
+	Container,
+	Title,
+	Overview,
+};

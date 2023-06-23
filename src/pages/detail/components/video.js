@@ -31,9 +31,9 @@ const Video = ({ id }) => {
 
 	return (
 		videoLink && (
-			<VideoContainer>
-				<VideoPlayer src={videoLink} allowFullScreen></VideoPlayer>
-			</VideoContainer>
+			<S.VideoContainer>
+				<S.VideoPlayer src={videoLink} allowFullScreen></S.VideoPlayer>
+			</S.VideoContainer>
 		)
 	);
 };
@@ -50,3 +50,8 @@ const VideoPlayer = styled.iframe`
 	margin-left: 110px;
 	height: 560px;
 `;
+
+const S = {
+	VideoContainer,
+	VideoPlayer,
+};

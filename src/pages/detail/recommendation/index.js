@@ -30,12 +30,7 @@ const SimilarMovies = ({ id }) => {
 	return (
 		similarMovies && (
 			<div>
-				<Title style={{ margin: "20px" }}>More Like This</Title>
-				{/* <SimilarList>
-					{similarMovies.map((movie, i) => (
-						<OneSimilarMovie key={i} movie={movie} />
-					))}
-				</SimilarList> */}
+				<S.Title style={{ margin: "20px" }}>More Like This</S.Title>
 				<MovieList movies={similarMovies} />
 			</div>
 		)
@@ -51,17 +46,4 @@ const Title = styled.div`
 	margin-bottom: 20px;
 `;
 
-const SimilarList = styled.div`
-	display: flex;
-	justify-content: space-around;
-	text-align: center;
-	p {
-		background-color: #d9d9d9;
-		width: 200px;
-		height: 300px;
-		margin-bottom: 20px;
-	}
-	div {
-		margin-bottom: 10px;
-	}
-`;
+const S = { Title };

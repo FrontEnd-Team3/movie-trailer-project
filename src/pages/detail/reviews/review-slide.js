@@ -1,6 +1,6 @@
 import Slider from "react-slick";
 import OneReview from "./one-review";
-import React, { Component } from "react";
+import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
@@ -10,8 +10,7 @@ import {
 	faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function NextArrow(props) {
-	const { style, onClick } = props;
+const NextArrow = ({ style, onClick }) => {
 	return (
 		<FontAwesomeIcon
 			style={{
@@ -26,10 +25,9 @@ function NextArrow(props) {
 			icon={faChevronRight}
 		/>
 	);
-}
+};
 
-function PrevArrow(props) {
-	const { style, onClick } = props;
+const PrevArrow = ({ style, onClick }) => {
 	return (
 		<FontAwesomeIcon
 			style={{
@@ -44,35 +42,36 @@ function PrevArrow(props) {
 			icon={faChevronLeft}
 		/>
 	);
-}
+};
 
-export default class MultipleItems extends Component {
-	render() {
-		const { reviewList } = this.props;
-		console.log("reviewList", reviewList);
+const MultipleItems = ({ reviewList }) => {
+	console.log("reviewList", reviewList);
 
-		const settings = {
-			dots: true,
-			arrow: true,
-			infinite: true,
-			speed: 700,
-			slidesToShow: 3,
-			slidesToScroll: 1,
-			nextArrow: <NextArrow />,
-			prevArrow: <PrevArrow />,
-		};
-		return (
-			<ReviewSliderBox>
-				<Slider {...settings}>
-					{reviewList.map((review, i) => (
-						<OneReview key={i} review={review} />
-					))}
-				</Slider>
-			</ReviewSliderBox>
-		);
-	}
-}
+	const settings = {
+		dots: true,
+		arrow: true,
+		infinite: true,
+		speed: 700,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		nextArrow: <NextArrow />,
+		prevArrow: <PrevArrow />,
+	};
+	return (
+		<S.ReviewSliderBox>
+			<Slider {...settings}>
+				{reviewList.map((review, i) => (
+					<OneReview key={i} review={review} />
+				))}
+			</Slider>
+		</S.ReviewSliderBox>
+	);
+};
+
+export default MultipleItems;
 
 const ReviewSliderBox = styled.div`
 	margin-left: 60px;
 `;
+
+const S = { ReviewSliderBox };

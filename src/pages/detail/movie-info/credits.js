@@ -73,18 +73,18 @@ const Credits = ({ id }) => {
 	return (
 		creditData && (
 			<>
-				<Container>
-					<Title>Director</Title>
+				<S.Container>
+					<S.Title>Director</S.Title>
 					{Director}
-				</Container>
-				<Container>
-					<Title>Writer</Title>
+				</S.Container>
+				<S.Container>
+					<S.Title>Writer</S.Title>
 					{Writer}
-				</Container>
-				<Container>
-					<Title>Top Cast</Title>
+				</S.Container>
+				<S.Container>
+					<S.Title>Top Cast</S.Title>
 					{FirstCast}, {SecondCast && SecondCast}
-				</Container>
+				</S.Container>
 			</>
 		)
 	);
@@ -102,3 +102,5 @@ const Title = styled.div`
 	margin-bottom: 10px;
 	margin-right: 30px;
 `;
+
+const S = { Container, Title };

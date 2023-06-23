@@ -37,18 +37,18 @@ const OneReview = ({ review }) => {
 	}
 
 	return (
-		<Review>
-			<ReviewTop>
-				<UserInfo>
+		<S.Review>
+			<S.ReviewTop>
+				<S.UserInfo>
 					<div>
-						<ProfileImage src={profileURL} />
+						<S.ProfileImage src={profileURL} />
 					</div>
-					<UserName>{review.author}</UserName>
-				</UserInfo>
-				<UserRate>★{UserRating}</UserRate>
-			</ReviewTop>
-			<ReviewContent>{review.content}</ReviewContent>
-		</Review>
+					<S.UserName>{review.author}</S.UserName>
+				</S.UserInfo>
+				<S.UserRate>★{UserRating}</S.UserRate>
+			</S.ReviewTop>
+			<S.ReviewContent>{review.content}</S.ReviewContent>
+		</S.Review>
 	);
 };
 
@@ -105,3 +105,13 @@ const UserName = styled.div`
 	margin-top: 10px;
 	font-size: 20px;
 `;
+
+const S = {
+	Review,
+	ProfileImage,
+	UserRate,
+	ReviewContent,
+	ReviewTop,
+	UserInfo,
+	UserName,
+};

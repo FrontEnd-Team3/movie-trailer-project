@@ -51,20 +51,28 @@ const Gallery = ({ id }) => {
 
 	return (
 		images && (
-			<MovieGallery>
-				<Title>Gallery</Title>
+			<S.MovieGallery>
+				<S.Title>Gallery</S.Title>
 				<div>
 					{Image1 ? (
-						<TopImage src={Image1} />
+						<S.TopImage src={Image1} />
 					) : (
-						<NoBackdropImage>No Image</NoBackdropImage>
+						<S.NoBackdropImage>No Image</S.NoBackdropImage>
 					)}
 				</div>
-				<GalleryBottom>
-					{Image2 ? <BottomImage src={Image2} /> : <NoImage>No Image</NoImage>}
-					{Image3 ? <BottomImage src={Image3} /> : <NoImage>No Image</NoImage>}
-				</GalleryBottom>
-			</MovieGallery>
+				<S.GalleryBottom>
+					{Image2 ? (
+						<S.BottomImage src={Image2} />
+					) : (
+						<S.NoImage>No Image</S.NoImage>
+					)}
+					{Image3 ? (
+						<S.BottomImage src={Image3} />
+					) : (
+						<S.NoImage>No Image</S.NoImage>
+					)}
+				</S.GalleryBottom>
+			</S.MovieGallery>
 		)
 	);
 };
@@ -117,3 +125,12 @@ const NoImage = styled.div`
 	padding-left: 10px;
 	padding-top: 80px;
 `;
+const S = {
+	Title,
+	MovieGallery,
+	TopImage,
+	GalleryBottom,
+	BottomImage,
+	NoBackdropImage,
+	NoImage,
+};
