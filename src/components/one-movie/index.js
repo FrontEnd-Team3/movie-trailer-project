@@ -31,6 +31,7 @@ const Title = styled.p`
 	word-break: keep-all;
 	line-height: 1.2rem;
 	font-weight: 500;
+	width: 200px;
 	color: #1c1d1f;
 	margin-top: 6px;
 `;
