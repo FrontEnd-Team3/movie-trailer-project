@@ -14,23 +14,23 @@ const MovieInfo = ({ id, target }) => {
 	}, []);
 
 	return (
-		<MovieInfoContainer>
-			<MovieDetail>
+		<S.MovieInfoContainer>
+			<S.MovieDetail>
 				{target.poster_path ? (
 					<div>
-						<MoviePoster src={posterURL} />
+						<S.MoviePoster src={posterURL} />
 					</div>
 				) : (
-					<NoPoster>No Poster</NoPoster>
+					<S.NoPoster>No Poster</S.NoPoster>
 				)}
-				<MovieDetailContent>
+				<S.MovieDetailContent>
 					<DetailInfo target={target} />
 					<Credits id={id} />
-				</MovieDetailContent>
-			</MovieDetail>
+				</S.MovieDetailContent>
+			</S.MovieDetail>
 			<Plot plot={target.overview} />
 			<Gallery id={id} />
-		</MovieInfoContainer>
+		</S.MovieInfoContainer>
 	);
 };
 
@@ -73,3 +73,11 @@ const NoPoster = styled.div`
 	padding-left: 9px;
 	padding-top: 120px;
 `;
+
+const S = {
+	MovieInfoContainer,
+	MoviePoster,
+	MovieDetail,
+	MovieDetailContent,
+	NoPoster,
+};

@@ -22,14 +22,14 @@ const DetailPage = () => {
 	return (
 		Target && (
 			<>
-				<VideoContainer>
+				<S.VideoContainer>
 					<Video id={MovieId} />
-				</VideoContainer>
-				<Container>
+				</S.VideoContainer>
+				<S.Container>
 					<MovieInfo id={MovieId} target={Target} />
 					<Reviews id={MovieId} />
 					<SimilarMovies id={MovieId} />
-				</Container>
+				</S.Container>
 			</>
 		)
 	);
@@ -47,3 +47,8 @@ const Container = styled.div`
 	font-family: "Inter";
 	/* background-color: #f2f2f2; */
 `;
+
+const S = {
+	VideoContainer,
+	Container,
+};

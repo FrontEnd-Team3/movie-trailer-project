@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FakeProfile from "../img/9.jpg";
+import FakeProfile from "../img/FakeProfile.jpg";
 
 const OneReview = ({ review }) => {
 	/*
@@ -37,33 +37,28 @@ const OneReview = ({ review }) => {
 	}
 
 	return (
-		<>
-			<Review>
-				<ReviewTop>
-					<UserInfo>
-						<div>
-							<ProfileImage src={profileURL} />
-						</div>
-						<UserName>UserName</UserName>
-					</UserInfo>
-					<UserRate>★{UserRating}</UserRate>
-				</ReviewTop>
-				<ReviewContent>{review.content}</ReviewContent>
-			</Review>
-		</>
+		<S.Review>
+			<S.ReviewTop>
+				<S.UserInfo>
+					<div>
+						<S.ProfileImage src={profileURL} />
+					</div>
+					<S.UserName>{review.author}</S.UserName>
+				</S.UserInfo>
+				<S.UserRate>★{UserRating}</S.UserRate>
+			</S.ReviewTop>
+			<S.ReviewContent>{review.content}</S.ReviewContent>
+		</S.Review>
 	);
 };
 
 export default OneReview;
 
 const Review = styled.div`
-	width: 322px;
 	height: 247px;
 	background-color: #d9d9d9;
 	border-radius: 16px;
 	padding: 10px;
-	overflow: hidden;
-	text-overflow: ellipsis;
 	margin-right: 40px;
 `;
 
@@ -81,9 +76,17 @@ const UserRate = styled.div`
 `;
 
 const ReviewContent = styled.div`
+	width: 305px;
 	margin-top: 10px;
 	font-weight: 100;
 	line-height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	// 5줄 넘어가면 ... 처리
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	white-space: normal;
 `;
 
 const ReviewTop = styled.div`
@@ -100,4 +103,15 @@ const UserInfo = styled.div`
 const UserName = styled.div`
 	margin-left: 10px;
 	margin-top: 10px;
+	font-size: 20px;
 `;
+
+const S = {
+	Review,
+	ProfileImage,
+	UserRate,
+	ReviewContent,
+	ReviewTop,
+	UserInfo,
+	UserName,
+};

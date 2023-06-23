@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import OneReview from "./one-review";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "apis/@core";
+import ReviewSlides from "./review-slide";
 
 const Reviews = ({ id }) => {
 	/*
@@ -23,24 +23,17 @@ const Reviews = ({ id }) => {
 	useEffect(() => {
 		getReviews(id);
 	}, []);
+
 	return (
 		<>
-			<ReviewsTop>
-				<Title>Reviews</Title>
+			<S.ReviewsTop>
+				<S.Title>Reviews</S.Title>
 				<span>{reviewList.length}</span>
-			</ReviewsTop>
+			</S.ReviewsTop>
 			{reviewList.length ? (
-				<ReviewListBox>
-					<button>{"<"}</button>
-					<button>{">"}</button>
-					<ReviewList>
-						{reviewList.map((review, i) => (
-							<OneReview key={i} review={review} />
-						))}
-					</ReviewList>
-				</ReviewListBox>
+				<ReviewSlides reviewList={reviewList} />
 			) : (
-				<NoReview>No Reviews</NoReview>
+				<S.NoReview>No Reviews</S.NoReview>
 			)}
 		</>
 	);
@@ -59,20 +52,6 @@ const ReviewsTop = styled.div`
 	}
 `;
 
-const ReviewListBox = styled.div`
-	display: flex;
-	overflow: hidden;
-	button {
-		border: none;
-		background-color: white;
-	}
-`;
-
-const ReviewList = styled.div`
-	display: flex;
-	/* justify-content: space-around; */
-`;
-
 const Title = styled.div`
 	font-size: 28px;
 	font-style: italic;
@@ -85,3 +64,5 @@ const NoReview = styled.div`
 	color: darkgray;
 	margin-left: 20px;
 `;
+
+const S = { ReviewsTop, Title, NoReview };

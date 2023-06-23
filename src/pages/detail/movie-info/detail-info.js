@@ -11,6 +11,7 @@ const DetailInfo = ({ target }) => {
 
 	let ReleasedYear;
 	if (target.release_date) {
+		// YYYY-MM-DD
 		ReleasedYear = target.release_date.split("-")[0];
 	} else {
 		ReleasedYear = "unknown";
@@ -18,17 +19,18 @@ const DetailInfo = ({ target }) => {
 
 	let ReleastedCountry;
 	if (target.production_countries.length) {
+		// iso_3166_1: 국가 이름 축약형
 		ReleastedCountry = target.production_countries[0]["iso_3166_1"];
 	} else {
 		ReleastedCountry = "unknown";
 	}
 	return (
 		<>
-			<MovieDetailTop>
-				<MovieRate>{target.adult ? 19 : 15}</MovieRate>
-				<MovieTitle>{target.title ? target.title : "unknown"}</MovieTitle>
-			</MovieDetailTop>
-			<MovieDetailMiddle>
+			<S.MovieDetailTop>
+				<S.MovieRate>{target.adult ? 19 : 15}</S.MovieRate>
+				<S.MovieTitle>{target.title ? target.title : "unknown"}</S.MovieTitle>
+			</S.MovieDetailTop>
+			<S.MovieDetailMiddle>
 				<p>
 					<span>{ReleasedYear}</span> <span>|</span>
 					<span>{ReleastedCountry}</span>
@@ -38,16 +40,16 @@ const DetailInfo = ({ target }) => {
 					<MovieGenre>Drama</MovieGenre>
 					<MovieGenre>Fantasy</MovieGenre> */}
 					{target.genres.map((genre, i) => (
-						<MovieGenre key={i}>{genre.name}</MovieGenre>
+						<S.MovieGenre key={i}>{genre.name}</S.MovieGenre>
 					))}
 				</p>
-			</MovieDetailMiddle>
-			<StarRating>
+			</S.MovieDetailMiddle>
+			<S.StarRating>
 				<p>{"★".repeat(Math.floor(target.vote_average))}</p>
 				<span>
 					{target.vote_average}({target.vote_count})
 				</span>
-			</StarRating>
+			</S.StarRating>
 		</>
 	);
 };
@@ -115,3 +117,12 @@ const StarRating = styled.div`
 		font-weight: 200;
 	}
 `;
+
+const S = {
+	MovieDetailTop,
+	MovieRate,
+	MovieTitle,
+	MovieDetailMiddle,
+	MovieGenre,
+	StarRating,
+};

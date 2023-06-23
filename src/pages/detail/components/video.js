@@ -17,7 +17,11 @@ const Video = ({ id }) => {
 
 		// console.log("video", TrailerVideo);
 		if (TrailerVideo && TrailerVideo.site === "YouTube") {
-			setVideoLink(`https://www.youtube.com/embed/${TrailerVideo.key}`);
+			setVideoLink(
+				// autoplay: 페이지 접속 시 동영상 자동재생
+				// mute: chrome에서 자동재생 막는 현상 방지
+				`https://www.youtube.com/embed/${TrailerVideo.key}?autoplay=1&mute=1`,
+			);
 		}
 	};
 
@@ -27,9 +31,9 @@ const Video = ({ id }) => {
 
 	return (
 		videoLink && (
-			<VideoContainer>
-				<VideoPlayer src={videoLink} allowFullScreen></VideoPlayer>
-			</VideoContainer>
+			<S.VideoContainer>
+				<S.VideoPlayer src={videoLink} allowFullScreen></S.VideoPlayer>
+			</S.VideoContainer>
 		)
 	);
 };
@@ -46,3 +50,8 @@ const VideoPlayer = styled.iframe`
 	margin-left: 110px;
 	height: 560px;
 `;
+
+const S = {
+	VideoContainer,
+	VideoPlayer,
+};
