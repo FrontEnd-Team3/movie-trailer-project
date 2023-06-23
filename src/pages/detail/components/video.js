@@ -17,7 +17,9 @@ const Video = ({ id }) => {
 
 		// console.log("video", TrailerVideo);
 		if (TrailerVideo && TrailerVideo.site === "YouTube") {
-			setVideoLink(`https://www.youtube.com/embed/${TrailerVideo.key}`);
+			setVideoLink(
+				`https://www.youtube.com/embed/${TrailerVideo.key}?autoplay=1&mute=1`,
+			);
 		}
 	};
 

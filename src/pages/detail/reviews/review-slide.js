@@ -57,7 +57,7 @@ export default class MultipleItems extends Component {
 			infinite: true,
 			speed: 700,
 			slidesToShow: 3,
-			slidesToScroll: Math.ceil(reviewList.length / 3),
+			slidesToScroll: 1,
 			nextArrow: <NextArrow />,
 			prevArrow: <PrevArrow />,
 		};
