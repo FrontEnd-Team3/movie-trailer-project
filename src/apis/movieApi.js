@@ -33,7 +33,7 @@ export const MovieApi = {
 	getMovieDetail(movie_id, params) {
 		return axiosInstance.get(`/movie/${movie_id}`, { params, video: true });
 	},
-	// /movie/
+	// /movie/upcoming
 	getUpcoming(params) {
 		return axiosInstance.get(`/movie/upcoming`, { params });
 	},
