@@ -43,7 +43,7 @@ const OneReview = ({ review }) => {
 					<div>
 						<ProfileImage src={profileURL} />
 					</div>
-					<UserName>UserName</UserName>
+					<UserName>{review.author}</UserName>
 				</UserInfo>
 				<UserRate>★{UserRating}</UserRate>
 			</ReviewTop>
@@ -55,13 +55,10 @@ const OneReview = ({ review }) => {
 export default OneReview;
 
 const Review = styled.div`
-	width: 322px;
 	height: 247px;
 	background-color: #d9d9d9;
 	border-radius: 16px;
 	padding: 10px;
-	overflow: hidden;
-	text-overflow: ellipsis;
 	margin-right: 40px;
 `;
 
@@ -79,9 +76,17 @@ const UserRate = styled.div`
 `;
 
 const ReviewContent = styled.div`
+	width: 305px;
 	margin-top: 10px;
 	font-weight: 100;
 	line-height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	// 5줄 넘어가면 ... 처리
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	white-space: normal;
 `;
 
 const ReviewTop = styled.div`
@@ -98,4 +103,5 @@ const UserInfo = styled.div`
 const UserName = styled.div`
 	margin-left: 10px;
 	margin-top: 10px;
+	font-size: 20px;
 `;

@@ -11,6 +11,7 @@ const DetailInfo = ({ target }) => {
 
 	let ReleasedYear;
 	if (target.release_date) {
+		// YYYY-MM-DD
 		ReleasedYear = target.release_date.split("-")[0];
 	} else {
 		ReleasedYear = "unknown";
@@ -18,6 +19,7 @@ const DetailInfo = ({ target }) => {
 
 	let ReleastedCountry;
 	if (target.production_countries.length) {
+		// iso_3166_1: 국가 이름 축약형
 		ReleastedCountry = target.production_countries[0]["iso_3166_1"];
 	} else {
 		ReleastedCountry = "unknown";

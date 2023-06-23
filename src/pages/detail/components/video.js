@@ -18,6 +18,8 @@ const Video = ({ id }) => {
 		// console.log("video", TrailerVideo);
 		if (TrailerVideo && TrailerVideo.site === "YouTube") {
 			setVideoLink(
+				// autoplay: 페이지 접속 시 동영상 자동재생
+				// mute: chrome에서 자동재생 막는 현상 방지
 				`https://www.youtube.com/embed/${TrailerVideo.key}?autoplay=1&mute=1`,
 			);
 		}

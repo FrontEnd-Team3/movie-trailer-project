@@ -38,7 +38,7 @@ const Credits = ({ id }) => {
 	} else {
 		FirstCast = "unknown";
 	}
-
+	// 배우 없는 경우
 	if (creditData && creditData.cast && creditData.cast.length >= 2) {
 		SecondCast = creditData.cast[1].name;
 	} else {
