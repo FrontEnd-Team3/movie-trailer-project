@@ -41,16 +41,15 @@ const Video = ({ id }) => {
 export default Video;
 
 const VideoContainer = styled.div`
-	width: 1120px;
-	padding: 43px 100px;
+	padding: 43px 0px;
+	display: flex;
+	justify-content: center;
 `;
-
 const VideoPlayer = styled.iframe`
 	width: 1120px;
-	margin-left: 110px;
+	/* margin-left: em; */
 	height: 560px;
 `;
-
 const S = {
 	VideoContainer,
 	VideoPlayer,

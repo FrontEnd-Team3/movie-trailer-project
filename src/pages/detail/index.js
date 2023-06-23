@@ -43,9 +43,10 @@ const VideoContainer = styled.div`
 
 const Container = styled.div`
 	width: 1120px;
-	margin: 0px 200px;
+	margin: 0 auto;
 	font-family: "Inter";
-	/* background-color: #f2f2f2; */
+	display: flex;
+	flex-direction: column;
 `;
 
 const S = {
