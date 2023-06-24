@@ -14,7 +14,7 @@ const OneMovie = ({ movie }) => {
 			{movie.poster_path ? (
 				<S.Img src={`${imgUrl}${movie.poster_path}`} />
 			) : (
-				<S.EmptyProfile>No Profile</S.EmptyProfile>
+				<S.EmptyProfile>No Poster</S.EmptyProfile>
 			)}
 			<S.Title>{movie.title}</S.Title>
 			<S.VoteLine>

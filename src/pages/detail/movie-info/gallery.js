@@ -87,7 +87,7 @@ const Title = styled.div`
 `;
 
 const MovieGallery = styled.div`
-	grid-area: 1/4/5/6;
+	grid-area: 1/5/3/6;
 	text-align: right;
 	width: 300px;
 	margin-left: 150px;

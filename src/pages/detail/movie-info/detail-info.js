@@ -45,9 +45,9 @@ const DetailInfo = ({ target }) => {
 				</p>
 			</S.MovieDetailMiddle>
 			<S.StarRating>
-				<p>{"★".repeat(Math.floor(target.vote_average))}</p>
+				<p>{"★".repeat(Math.floor((target.vote_average / 2).toFixed(1)))}</p>
 				<span>
-					{target.vote_average}({target.vote_count})
+					{(target.vote_average / 2).toFixed(1)}({target.vote_count})
 				</span>
 			</S.StarRating>
 		</>

@@ -12,7 +12,7 @@ const Plot = ({ plot }) => {
 export default Plot;
 
 const Container = styled.div`
-	grid-area: 3 / 1 / 5 / 4;
+	grid-area: 2 / 1 / 3 /5;
 	margin-top: 20px;
 	height: auto;
 `;
@@ -27,6 +27,13 @@ const Title = styled.div`
 const Overview = styled.div`
 	font-weight: 200;
 	line-height: 25px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	// 5줄 넘어가면 ... 처리
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	white-space: normal;
 `;
 
 const S = {

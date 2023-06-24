@@ -72,7 +72,7 @@ const Credits = ({ id }) => {
 
 	return (
 		creditData && (
-			<>
+			<CreditContainer>
 				<S.Container>
 					<S.Title>Director</S.Title>
 					{Director}
@@ -85,12 +85,16 @@ const Credits = ({ id }) => {
 					<S.Title>Top Cast</S.Title>
 					{FirstCast}, {SecondCast && SecondCast}
 				</S.Container>
-			</>
+			</CreditContainer>
 		)
 	);
 };
 
 export default Credits;
+
+const CreditContainer = styled.div`
+	/* height: 250px; */
+`;
 
 const Container = styled.div`
 	display: flex;

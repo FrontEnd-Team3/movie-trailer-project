@@ -41,9 +41,9 @@ const MovieInfoContainer = styled.div`
 	padding-top: 20px;
 	padding-left: 20px;
 	display: grid;
-	height: auto;
+	height: 500px;
 	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: repeat(4, 1fr);
+	grid-template-rows: repeat(5, 1fr);
 	grid-column-gap: 0px;
 	grid-row-gap: 0px;
 `;
@@ -54,7 +54,7 @@ const MoviePoster = styled.img`
 `;
 
 const MovieDetail = styled.div`
-	grid-area: 1 / 1 / 3 / 4;
+	grid-area: 1 / 1 / 2 / 5;
 	display: flex;
 `;
 

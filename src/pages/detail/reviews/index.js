@@ -25,7 +25,7 @@ const Reviews = ({ id }) => {
 	}, []);
 
 	return (
-		<>
+		<S.ReviewBox>
 			<S.ReviewsTop>
 				<S.Title>Reviews</S.Title>
 				<span>{reviewList.length}</span>
@@ -35,18 +35,21 @@ const Reviews = ({ id }) => {
 			) : (
 				<S.NoReview>No Reviews</S.NoReview>
 			)}
-		</>
+		</S.ReviewBox>
 	);
 };
 
 export default Reviews;
+
+const ReviewBox = styled.div`
+	margin-top: 50px;
+`;
 
 const ReviewsTop = styled.div`
 	display: flex;
 	margin-left: 20px;
 	span {
 		margin-left: 10px;
-		margin-top: -3px;
 		font: 25px italic;
 		color: lightgray;
 	}
@@ -65,4 +68,4 @@ const NoReview = styled.div`
 	margin-left: 20px;
 `;
 
-const S = { ReviewsTop, Title, NoReview };
+const S = { ReviewBox, ReviewsTop, Title, NoReview };
