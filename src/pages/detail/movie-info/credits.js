@@ -19,9 +19,7 @@ const Credits = ({ id }) => {
 	const [creditData, setCreditData] = useState(null);
 
 	const getCredits = async movie_id => {
-		const res = await axiosInstance.get(`/movie/${movie_id}/credits`, {
-			params: { api_key: process.env.REACT_APP_TOKEN },
-		});
+		const res = await axiosInstance.get(`/movie/${movie_id}/credits`);
 		console.log("credit", res.data);
 		setCreditData(res.data);
 	};

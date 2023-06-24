@@ -7,9 +7,7 @@ const Video = ({ id }) => {
 	const [videoLink, setVideoLink] = useState(null);
 
 	const getVideo = async movie_id => {
-		const res = await axiosInstance.get(`/movie/${movie_id}/videos`, {
-			params: { api_key: process.env.REACT_APP_TOKEN },
-		});
+		const res = await axiosInstance.get(`/movie/${movie_id}/videos`);
 
 		const TrailerVideo = res.data.results.find(
 			video => video.name === "Official Trailer",
