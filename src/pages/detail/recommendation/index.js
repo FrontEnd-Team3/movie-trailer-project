@@ -41,7 +41,7 @@ const SimilarMovies = ({ id }) => {
 			enabled: false,
 		},
 	);
-	console.log("response", data);
+	// console.log("response", data);
 
 	const similarMovies =
 		data?.pages

@@ -17,9 +17,13 @@ const DetailInfo = ({ target }) => {
 		ReleasedYear = "unknown";
 	}
 
+	// iso_3166_1: 국가 이름 축약형
 	let ReleastedCountry;
-	if (target.production_countries.length) {
-		// iso_3166_1: 국가 이름 축약형
+	if (
+		target &&
+		target.production_countries &&
+		target.production_countries.length
+	) {
 		ReleastedCountry = target.production_countries[0]["iso_3166_1"];
 	} else {
 		ReleastedCountry = "unknown";
@@ -39,9 +43,11 @@ const DetailInfo = ({ target }) => {
 					{/* <MovieGenre>Comedy</MovieGenre>
 					<MovieGenre>Drama</MovieGenre>
 					<MovieGenre>Fantasy</MovieGenre> */}
-					{target.genres.map((genre, i) => (
-						<S.MovieGenre key={i}>{genre.name}</S.MovieGenre>
-					))}
+					{target && target.genres
+						? target.genres.map((genre, i) => (
+								<S.MovieGenre key={i}>{genre.name}</S.MovieGenre>
+						  ))
+						: null}
 				</p>
 			</S.MovieDetailMiddle>
 			<S.StarRating>

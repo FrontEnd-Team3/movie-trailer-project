@@ -19,7 +19,7 @@ const SimilarMovies = ({ id }) => {
 		const res = await axiosInstance.get(`/movie/${movie_id}/similar`, {
 			params: { api_key: process.env.REACT_APP_TOKEN },
 		});
-		console.log("similar", res.data);
+		// console.log("similar", res.data);
 		setSimilarMovies(res.data.results);
 	};
 

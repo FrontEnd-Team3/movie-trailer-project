@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { axiosInstance } from "apis/@core";
+import { useQuery } from "react-query";
+import { QUERYKEYS } from "consts/QUERYKEYS";
+import { MovieApi } from "apis/movieApi";
 
 const Gallery = ({ id }) => {
 	/*
@@ -9,34 +10,45 @@ const Gallery = ({ id }) => {
         - 가로형 1: backdrop[0]
         - 세로형 2: posters[0], posters[1]
 	*/
-	const [images, setImages] = useState(null);
 	const BaseURL = "https://image.tmdb.org/t/p/w500";
 	let Image1;
 	let Image2;
 	let Image3;
 
-	const getImages = async movie_id => {
-		const res = await axiosInstance.get(`/movie/${movie_id}/images`);
-		console.log("images", res.data);
-		setImages(res.data);
-	};
+	// const [images, setImages] = useState(null);
+	// const getImages = async movie_id => {
+	// 	const res = await axiosInstance.get(`/movie/${movie_id}/images`);
+	// 	// console.log("images", res.data);
+	// 	setImages(res.data);
+	// };
 
-	useEffect(() => {
-		getImages(id);
-	}, []);
+	// useEffect(() => {
+	// 	getImages(id);
+	// }, []);
 
+	const { data } = useQuery(
+		[QUERYKEYS.MOVIE_IMAGES, id],
+		() => MovieApi.getMovieImages(id, { page: 1 }),
+		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	);
+	console.log("images", data?.data);
+
+	const images = data?.data;
+
+	// 가로로 긴 이미지 에러 핸들링
 	if (images && images.backdrops.length) {
 		Image1 = BaseURL + images.backdrops[0].file_path;
 	} else {
 		Image1 = null;
 	}
-
+	// 왼쪽 포스터 에러 핸들링
 	if (images && images.logos.length) {
 		Image2 = BaseURL + images.logos[0].file_path;
 	} else {
 		Image2 = null;
 	}
-
+	// 오른쪽 포스터 에러 핸들링
+	// 포스터에서 두 장을 다 가져올 경우 두 사진이 똑같은 경우가 많아서 하나는 logo key로 받아오도록 하였습니다.
 	if (images && images.posters.length) {
 		if (images.posters.length > 100) {
 			Image3 = BaseURL + images.posters[100].file_path;

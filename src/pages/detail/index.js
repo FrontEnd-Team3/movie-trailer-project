@@ -7,8 +7,8 @@ import { useSearchParams } from "react-router-dom";
 import { CacheUtils } from "apis/movieApi";
 
 const DetailPage = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const MovieId = parseInt(searchParams.get("id"));
+	const [searchParams] = useSearchParams();
+	const MovieId = searchParams.get("id");
 	console.log("id", MovieId);
 
 	let Target;
