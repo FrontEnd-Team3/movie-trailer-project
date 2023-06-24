@@ -60,7 +60,7 @@ const Title = styled.div`
 `;
 
 const NoReview = styled.div`
-	height: 247px;
+	height: 100px;
 	color: darkgray;
 	margin-left: 20px;
 `;
