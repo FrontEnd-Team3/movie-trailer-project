@@ -40,11 +40,19 @@ const OneMovie = ({ movie }) => {
 						)}
 					</>
 				)}
-				<S.Title>{movie.title}</S.Title>
-				<S.VoteLine>
-					<AiFillStar size={16} />
-					<span>{(movie.vote_average / 2).toFixed(1)}</span>
-				</S.VoteLine>
+				{isLoading ? (
+					<Skeleton variant="text" sx={{ fontSize: "15px" }} />
+				) : (
+					<S.Title>{movie.title}</S.Title>
+				)}
+				{isLoading ? (
+					<Skeleton variant="text" sx={{ fontSize: "13px" }} />
+				) : (
+					<S.VoteLine>
+						<AiFillStar size={16} />
+						<span>{(movie.vote_average / 2).toFixed(1)}</span>
+					</S.VoteLine>
+				)}
 			</Wrapper>
 		</div>
 	);
@@ -54,11 +62,11 @@ export default OneMovie;
 
 const Wrapper = styled.div`
 	/* :hover {
-		cursor: pointer;
-		transform: scale(1.5);
-		background-color: pink;
-		border-radius: 4px;
-	} */
+    cursor: pointer;
+    transform: scale(1.5);
+    background-color: pink;
+    border-radius: 4px;
+  } */
 `;
 
 const Title = styled.p`
