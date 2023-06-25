@@ -1,3 +1,4 @@
+//QUERYKEYS.js
 export const QUERYKEYS = {
 	MOVIE_POPULAR: "get/popular",
 	MOVIE_NOWPLAYING: "get/now-playing",

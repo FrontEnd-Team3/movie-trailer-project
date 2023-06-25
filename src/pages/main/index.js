@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieList from "components/movie-list";
-import useFetchMovies from "hooks/useMoviesQuery";
-import useInfiniteScroll from "hooks/useInfiniteScroll";
 import { QUERYKEYS2 } from "consts/QUERYKEYS";
 import TopButton from "components/top-button";
+import useMovieList from "hooks/useMovieList";
 
 const Main = () => {
 	const navigate = useNavigate();
@@ -15,37 +14,9 @@ const Main = () => {
 		}
 	}, []);
 
-	const [pageNum, setPageNum] = useState(1);
-	const {
-		data: newData,
-		isSuccess,
-		isLoading,
-		isFetching,
-	} = useFetchMovies(pageNum, QUERYKEYS2.MOVIE_POPULAR);
-
-	const [data, setData] = useState(null);
-	console.log(data);
-	useEffect(() => {
-		if (newData) {
-			if (data === null) {
-				setData(newData);
-			} else {
-				setData(prevData => ({
-					...newData,
-					results: [...prevData.results, ...newData.results],
-				}));
-			}
-		}
-	}, [newData]);
-
-	const image500 = "https://image.tmdb.org/t/p/w500";
-
-	const loadMore = useCallback(() => {
-		setPageNum(prevPageNum => prevPageNum + 1);
-	}, []);
-
-	//재사용 가능하도록 무한스크롤 커스텀훅화
-	const { ref } = useInfiniteScroll(isLoading, isFetching, loadMore);
+	const { data, isSuccess, isLoading, isFetching, pageNum, ref } = useMovieList(
+		QUERYKEYS2.MOVIE_POPULAR,
+	);
 
 	if (isLoading && pageNum === 1) {
 		return <div>Loading...</div>;
