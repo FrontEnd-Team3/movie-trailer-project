@@ -22,7 +22,7 @@ const Header = () => {
 		<S.Wrapper>
 			<S.Container>
 				<S.LogoNavBar>
-					<S.Logo onClick={() => navigate("/movies/popular")}>
+					<S.Logo onClick={() => onGoPage("popular")}>
 						<BiCameraMovie size={22} />
 						<S.LogoSpan>movie</S.LogoSpan>
 						<S.LogoTitle>

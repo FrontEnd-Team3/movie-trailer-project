@@ -10,7 +10,7 @@ const useFetchMovies = (page, endpoint) => {
 	}
 
 	return useQuery(["movies", page], () => fetchMovies({ page }), {
-		keepPreviousData: false,
+		keepPreviousData: true,
 		staleTime: 0,
 		refetchOnWindowFocus: false,
 		retry: false,
