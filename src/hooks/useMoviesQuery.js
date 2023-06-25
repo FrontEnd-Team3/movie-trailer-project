@@ -1,7 +1,7 @@
 import { axiosInstance } from "apis/@core";
 import { useQuery } from "react-query";
 
-const useFetchMovies = (page, endpoint) => {
+const useFetchMovies = (page, language, endpoint) => {
 	async function fetchMovies(params) {
 		const response = await axiosInstance.get(`/movie/${endpoint}`, {
 			params,
@@ -9,7 +9,7 @@ const useFetchMovies = (page, endpoint) => {
 		return response.data;
 	}
 
-	return useQuery(["movies", page], () => fetchMovies({ page }), {
+	return useQuery(["movies", page], () => fetchMovies({ language, page }), {
 		keepPreviousData: true,
 		staleTime: 0,
 		refetchOnWindowFocus: false,
