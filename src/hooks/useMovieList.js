@@ -1,3 +1,4 @@
+import { debounce } from "lodash";
 import { useState, useEffect, useCallback } from "react";
 import useInfiniteScroll from "./useInfiniteScroll";
 import useFetchMovies from "./useMoviesQuery";
@@ -25,9 +26,11 @@ const useMovieList = queryKey => {
 		}
 	}, [newData]);
 
-	const loadMore = useCallback(() => {
-		setPageNum(prevPageNum => prevPageNum + 1);
-	}, []);
+	const loadMore = useCallback(
+		debounce(() => {
+			setPageNum(prevPageNum => prevPageNum + 1);
+		}, 400),
+	);
 
 	const { ref } = useInfiniteScroll(isLoading, isFetching, loadMore);
 

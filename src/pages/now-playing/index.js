@@ -1,11 +1,11 @@
 import MovieList from "components/movie-list";
-import { QUERYKEYS2 } from "consts/QUERYKEYS";
 import TopButton from "components/top-button";
 import useMovieList from "hooks/useMovieList";
+import { PARAMS } from "consts/PARAMS";
 
 const NowPlaying = () => {
 	const { data, isSuccess, isLoading, isFetching, pageNum, ref } = useMovieList(
-		QUERYKEYS2.MOVIE_NOWPLAYING,
+		PARAMS.MOVIE_NOWPLAYING,
 	);
 
 	if (isLoading && pageNum === 1) {

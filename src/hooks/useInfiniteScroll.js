@@ -4,9 +4,9 @@ import { useInView } from "react-intersection-observer";
 
 const useInfiniteScroll = (isLoading, isFetching, loadMore) => {
 	const { ref, inView } = useInView({
-		threshold: 0.25,
+		threshold: 1,
 		rootMargin: "0px",
-		triggerOnce: true,
+		triggerOnce: false,
 	});
 
 	useEffect(() => {
