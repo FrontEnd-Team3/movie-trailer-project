@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CacheUtils } from "apis/movieApi";
 import MovieList from "components/movie-list";
+import useFetchMovies from "hooks/useMoviesQuery";
+import useInfiniteScroll from "hooks/useInfiniteScroll";
+import { QUERYKEYS2 } from "consts/QUERYKEYS";
+import TopButton from "components/top-button";
 
 const Main = () => {
 	const navigate = useNavigate();
@@ -11,19 +14,59 @@ const Main = () => {
 			// 캐시하기
 		}
 	}, []);
-	CacheUtils.cachePopularMovie(1);
-	CacheUtils.cacheNowPlayingMovie(1);
-	CacheUtils.cacheTopRatedMovie(1);
 
-	// 사용법
-	let popularMovies;
-	const cachedPopularMovies = CacheUtils.cachePopularMovie();
-	console.log("cached", cachedPopularMovies);
-	if (!cachedPopularMovies.data) popularMovies = [];
-	else {
-		popularMovies = cachedPopularMovies.data.data.results;
+	const [pageNum, setPageNum] = useState(1);
+	const {
+		data: newData,
+		isSuccess,
+		isLoading,
+		isFetching,
+	} = useFetchMovies(pageNum, QUERYKEYS2.MOVIE_POPULAR);
+
+	const [data, setData] = useState(null);
+	console.log(data);
+	useEffect(() => {
+		if (newData) {
+			if (data === null) {
+				setData(newData);
+			} else {
+				setData(prevData => ({
+					...newData,
+					results: [...prevData.results, ...newData.results],
+				}));
+			}
+		}
+	}, [newData]);
+
+	const image500 = "https://image.tmdb.org/t/p/w500";
+
+	const loadMore = useCallback(() => {
+		setPageNum(prevPageNum => prevPageNum + 1);
+	}, []);
+
+	//재사용 가능하도록 무한스크롤 커스텀훅화
+	const { ref } = useInfiniteScroll(isLoading, isFetching, loadMore);
+
+	if (isLoading && pageNum === 1) {
+		return <div>Loading...</div>;
 	}
-	console.log(popularMovies);
-	return popularMovies && <MovieList movies={popularMovies} />;
+	if (!data && pageNum === 1) {
+		return <div>Data is not available</div>;
+	}
+	return (
+		<div>
+			{/* {data && <img src={`${image500}${data.results[0].backdrop_path}`} />} */}
+			{/* <br />
+			<br />
+			<br />
+			<br /> */}
+			<TopButton />
+			<MovieList movies={data?.results} />
+			{(isLoading || isFetching) && <div>Loading More...</div>}
+			{!isFetching && (
+				<div ref={ref}>{isSuccess && pageNum < data.total_pages}</div>
+			)}
+		</div>
+	);
 };
 export default Main;
