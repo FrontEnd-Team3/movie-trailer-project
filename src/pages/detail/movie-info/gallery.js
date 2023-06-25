@@ -16,9 +16,7 @@ const Gallery = ({ id }) => {
 	let Image3;
 
 	const getImages = async movie_id => {
-		const res = await axiosInstance.get(`/movie/${movie_id}/images`, {
-			params: { api_key: process.env.REACT_APP_TOKEN },
-		});
+		const res = await axiosInstance.get(`/movie/${movie_id}/images`);
 		console.log("images", res.data);
 		setImages(res.data);
 	};
