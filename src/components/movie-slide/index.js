@@ -15,12 +15,12 @@ const MovieSlide = ({ movies }) => {
 
 	return (
 		<div>
-			<PButton onClick={toPrev}>
+			<S.PButton onClick={toPrev}>
 				<MdOutlineNavigateBefore size={50} />
-			</PButton>
-			<NButton onClick={toNext}>
+			</S.PButton>
+			<S.NButton onClick={toNext}>
 				<MdOutlineNavigateNext size={50} />
-			</NButton>
+			</S.NButton>
 			<S.Wrapper>
 				{movies.map(movie => (
 					<OneSlide movie={movie} slide={slide} />
@@ -69,4 +69,6 @@ const Wrapper = styled.div`
 
 const S = {
 	Wrapper,
+	PButton,
+	NButton,
 };
