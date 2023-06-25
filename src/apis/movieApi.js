@@ -3,7 +3,7 @@ import { axiosInstance } from "./@core";
 import { useQuery } from "react-query";
 
 const apiConfig = {
-	language: "ko-KR",
+	// language: "ko-KR",
 	api_key: process.env.REACT_APP_TOKEN,
 };
 const queryConfig = { staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 };
@@ -37,42 +37,54 @@ export const MovieApi = {
 	getUpcoming(params) {
 		return axiosInstance.get(`/movie/upcoming`, { params });
 	},
+
+	// /search/여러가지
+	getSearch(criterion, params) {
+		return axiosInstance.get(`/search/${criterion}`, { params });
+	},
 };
 
 export const CacheUtils = {
 	cachePopularMovie: page => {
 		return useQuery(
 			["get/popular"],
-			() => MovieApi.getPopularMovie({ ...apiConfig, page }),
+			() => MovieApi.getPopularMovie({ page }),
 			queryConfig,
 		);
 	},
 	cacheNowPlayingMovie: page => {
 		return useQuery(
 			["get/now-playing"],
-			() => MovieApi.getNowPlayingMovie({ ...apiConfig, page }),
+			() => MovieApi.getNowPlayingMovie({ page }),
 			queryConfig,
 		);
 	},
 	cacheTopRatedMovie: page => {
 		return useQuery(
 			["get/top-rated"],
-			() => MovieApi.getTopRatedMovie({ ...apiConfig, page }),
+			() => MovieApi.getTopRatedMovie({ page }),
 			queryConfig,
 		);
 	},
 	cacheMovieDetail: (movie_id, page) => {
 		return useQuery(
 			["get/movie-detail", movie_id],
-			() => MovieApi.getMovieDetail(movie_id, { ...apiConfig, page }),
+			() => MovieApi.getMovieDetail(movie_id, { page }),
 			queryConfig,
 		);
 	},
 	cacheUpcomingMovie: page => {
 		return useQuery(
 			["get/upcoming"],
-			() => MovieApi.getUpcoming({ ...apiConfig, page }),
+			() => MovieApi.getUpcoming({ page }),
 			queryConfig,
 		);
 	},
+	// cacheSearch: (criterion, query, page) => {
+	// 	return useQuery(
+	// 		["get/upcoming", criterion],
+	// 		() => MovieApi.getSearch(criterion, { page, query }),
+	// 		queryConfig,
+	// 	);
+	// },
 };
