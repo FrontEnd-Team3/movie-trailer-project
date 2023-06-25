@@ -11,7 +11,6 @@ import SearchBar from "components/searchbar";
 
 const Header = () => {
 	const navigate = useNavigate();
-
 	const onGoPage = endpoint => {
 		navigate(`movies/${endpoint}`);
 	};
