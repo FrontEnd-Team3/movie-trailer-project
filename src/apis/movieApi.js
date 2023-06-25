@@ -4,8 +4,7 @@ import { axiosInstance } from "./@core";
 import { useQuery } from "react-query";
 
 const apiConfig = {
-	// language: "ko-KR",
-	api_key: process.env.REACT_APP_TOKEN,
+	language: "ko-KR",
 };
 
 const queryConfig = { staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 };
