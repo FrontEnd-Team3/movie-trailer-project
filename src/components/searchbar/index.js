@@ -29,7 +29,6 @@ const SearchBar = () => {
 		selectRedirect();
 	}, []);
 
-
 	return (
 		<>
 			<div>
