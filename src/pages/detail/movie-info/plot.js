@@ -1,9 +1,11 @@
+import { useLanguage } from "context/selectedLanguage";
 import styled from "styled-components";
 
 const Plot = ({ plot }) => {
+	const { selectedLanguage } = useLanguage();
 	return (
 		<S.Container>
-			<S.Title>Plot</S.Title>
+			<S.Title>{selectedLanguage === "ko-KR" ? "줄거리" : "Plot"}</S.Title>
 			<S.Overview>{plot ? plot : "No Plot"}</S.Overview>
 		</S.Container>
 	);

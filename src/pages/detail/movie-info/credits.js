@@ -1,5 +1,6 @@
 import { MovieApi } from "apis/movieApi";
 import { QUERYKEYS } from "consts/QUERYKEYS";
+import { useLanguage } from "context/selectedLanguage";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 
@@ -79,19 +80,25 @@ const Credits = ({ id }) => {
 		Writer = "unknown";
 	}
 
+	const { selectedLanguage } = useLanguage();
+
 	return (
 		creditData && (
 			<CreditContainer>
 				<S.Container>
-					<S.Title>Director</S.Title>
+					<S.Title>
+						{selectedLanguage === "ko-KR" ? "감독" : "Director"}
+					</S.Title>
 					{Director}
 				</S.Container>
 				<S.Container>
-					<S.Title>Writer</S.Title>
+					<S.Title>{selectedLanguage === "ko-KR" ? "각본" : "Writer"}</S.Title>
 					{Writer}
 				</S.Container>
 				<S.Container>
-					<S.Title>Top Cast</S.Title>
+					<S.Title>
+						{selectedLanguage === "ko-KR" ? "출연" : "Top Cast"}
+					</S.Title>
 					{FirstCast}, {SecondCast && SecondCast}
 				</S.Container>
 			</CreditContainer>

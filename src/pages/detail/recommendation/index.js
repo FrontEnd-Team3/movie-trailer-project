@@ -3,6 +3,7 @@ import { axiosInstance } from "apis/@core";
 import MovieList from "components/movie-list";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import { useEffect } from "react";
+import { useLanguage } from "context/selectedLanguage";
 
 const SimilarMovies = ({ id }) => {
 	/*
@@ -13,7 +14,6 @@ const SimilarMovies = ({ id }) => {
         - 제목: .title
         - 평점: .vote_average
 	*/
-
 	const queryClient = useQueryClient();
 
 	// data: 가져온 데이터
@@ -23,7 +23,10 @@ const SimilarMovies = ({ id }) => {
 		// pageParam: 페이지 식별자. getNextPageParam을 통해 이 값에 1씩 더해줌으로써 페이지 구분
 		({ pageParam = 1 }) =>
 			axiosInstance.get(`/movie/${id}/similar`, {
-				params: { api_key: process.env.REACT_APP_TOKEN, page: pageParam },
+				params: {
+					api_key: process.env.REACT_APP_TOKEN,
+					page: pageParam,
+				},
 			}),
 		{
 			// getNextPageParam: 다음 페이지의 파라미터 값을 결정함
@@ -79,10 +82,13 @@ const SimilarMovies = ({ id }) => {
 		queryClient.setQueryData("recommend-movies", similarMovies);
 	}, [id]);
 
+	const { selectedLanguage } = useLanguage();
 	return (
 		similarMovies && (
 			<S.MoreLikeThis>
-				<S.Title style={{ margin: "20px" }}>More Like This</S.Title>
+				<S.Title style={{ margin: "20px" }}>
+					{selectedLanguage === "ko-KR" ? "유사 작품 추천" : "More Like This"}
+				</S.Title>
 				<MovieList movies={similarMovies} isLoading={isLoading} />
 			</S.MoreLikeThis>
 		)

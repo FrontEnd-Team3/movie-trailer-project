@@ -3,6 +3,7 @@ import ReviewSlides from "./review-slide";
 import { useQuery } from "react-query";
 import { QUERYKEYS } from "consts/QUERYKEYS";
 import { MovieApi } from "apis/movieApi";
+import { useLanguage } from "context/selectedLanguage";
 
 const Reviews = ({ id }) => {
 	/*
@@ -34,10 +35,11 @@ const Reviews = ({ id }) => {
 
 	const reviewList = data?.data?.results;
 
+	const { selectedLanguage } = useLanguage();
 	return (
 		<S.ReviewBox>
 			<S.ReviewsTop>
-				<S.Title>Reviews</S.Title>
+				<S.Title>{selectedLanguage === "ko-KR" ? "리뷰" : "Reviews"}</S.Title>
 				<span>{reviewList?.length}</span>
 			</S.ReviewsTop>
 			{reviewList?.length ? (

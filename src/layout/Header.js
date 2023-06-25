@@ -15,6 +15,7 @@ const Header = () => {
 
 	const onGoPage = endpoint => {
 		navigate(`movies/${endpoint}`);
+		window.location.reload();
 	};
 	const { selectedLanguage } = useLanguage();
 	return (

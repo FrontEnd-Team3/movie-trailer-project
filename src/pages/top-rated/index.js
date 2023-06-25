@@ -1,23 +1,33 @@
-import { CacheUtils } from "apis/movieApi";
 import MovieList from "components/movie-list";
+import { QUERYKEYS2 } from "consts/QUERYKEYS";
+import TopButton from "components/top-button";
+import useMovieList from "hooks/useMovieList";
 
 const TopRated = () => {
-	const getTopRatedMovie = () => {
-		const result = queryClient.getQueryData(["get/top-rated"]);
-		return result || {};
-		// return { data, isLoading, isSuccess };
-		// You can use the cached data in other places as needed
-	};
-	// CacheUtils.cacheTopRatedMovie(1);
+	const { data, isSuccess, isLoading, isFetching, pageNum, ref } = useMovieList(
+		QUERYKEYS2.MOVIE_TOPRATED,
+	);
 
-	// 사용법
-	let topRatedMovies;
-	const cachedTopRatedMovies = CacheUtils.cacheTopRatedMovie();
-	if (!cachedTopRatedMovies.data) topRatedMovies = [];
-	else {
-		topRatedMovies = cachedTopRatedMovies.data.data.results;
+	if (isLoading && pageNum === 1) {
+		return <div>Loading...</div>;
 	}
-	console.log(topRatedMovies);
-	return topRatedMovies && <MovieList movies={topRatedMovies} />;
+	if (!data && isSuccess && pageNum === 1) {
+		return <div>Data is not available</div>;
+	}
+	return (
+		<div>
+			{/* {data && <img src={`${image500}${data.results[0].backdrop_path}`} />} */}
+			{/* <br />
+			<br />
+			<br />
+			<br /> */}
+			<TopButton />
+			<MovieList movies={data?.results} />
+			{(isLoading || isFetching) && <div>Loading More...</div>}
+			{!isFetching && (
+				<div ref={ref}>{isSuccess && pageNum < data.total_pages}</div>
+			)}
+		</div>
+	);
 };
 export default TopRated;

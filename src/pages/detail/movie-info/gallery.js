@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useQuery } from "react-query";
 import { QUERYKEYS } from "consts/QUERYKEYS";
 import { MovieApi } from "apis/movieApi";
+import { useLanguage } from "context/selectedLanguage";
 
 const Gallery = ({ id }) => {
 	/*
@@ -59,10 +60,11 @@ const Gallery = ({ id }) => {
 		Image3 = null;
 	}
 
+	const { selectedLanguage } = useLanguage();
 	return (
 		images && (
 			<S.MovieGallery>
-				<S.Title>Gallery</S.Title>
+				<S.Title>{selectedLanguage === "ko-KR" ? "갤러리" : "Gallery"}</S.Title>
 				<div>
 					{Image1 ? (
 						<S.TopImage src={Image1} />
