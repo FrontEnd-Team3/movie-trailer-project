@@ -46,20 +46,6 @@ const SearchBar = () => {
 					</S.SearchButton>
 				</S.Form>
 			</div>
-			{/* <S.SearchSelect
-				name="searchCriterion"
-				ref={selectRef}
-				id=""
-				onChange={selectRedirect}
-			>
-				<SearchOption value="collection">Collection</SearchOption>
-				<SearchOption value="company">Company</SearchOption>
-				<SearchOption value="keyword">Keyword</SearchOption>
-				<SearchOption value="movie">Movie</SearchOption>
-				<SearchOption value="multi">Multi</SearchOption>
-				<SearchOption value="person">Person</SearchOption>
-				<SearchOption value="tv">TV</SearchOption>
-			</S.SearchSelect> */}
 			<Select
 				id="demo-select-small"
 				value={criterion}
@@ -79,12 +65,6 @@ const SearchBar = () => {
 				<MenuItem value="multi">Multi</MenuItem>
 				<MenuItem value="person">Person</MenuItem>
 				<MenuItem value="tv">TV</MenuItem>
-				{/* <MenuItem value="">
-					<em>None</em>
-				</MenuItem>
-				<MenuItem value={10}>Ten</MenuItem>
-				<MenuItem value={20}>Twenty</MenuItem>
-				<MenuItem value={30}>Thirty</MenuItem> */}
 			</Select>
 		</>
 	);
