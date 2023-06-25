@@ -7,7 +7,7 @@ const DetailInfo = ({ target }) => {
 	// 개봉국가: production_countries[0]["iso_3166_1"]
 	// 장르: genres -> map 돌리기
 	// 평점: vote_average (vote_count)
-	console.log("country", target.production_countries);
+	// console.log("country", target.production_countries);
 
 	let ReleasedYear;
 	if (target.release_date) {

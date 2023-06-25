@@ -8,6 +8,7 @@ import {
 import { BiCameraMovie } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "components/searchbar";
+import { useLanguage } from "context/selectedLanguage";
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Header = () => {
 	const onGoPage = endpoint => {
 		navigate(`movies/${endpoint}`);
 	};
-
+	const { selectedLanguage } = useLanguage();
 	return (
 		<S.Wrapper>
 			<S.Container>
@@ -23,17 +24,27 @@ const Header = () => {
 					<S.Logo onClick={() => navigate("/movies/popular")}>
 						<BiCameraMovie size={22} />
 						<S.LogoSpan>movie</S.LogoSpan>
-						<S.LogoTitle>상영관</S.LogoTitle>
+						<S.LogoTitle>
+							{selectedLanguage === "ko-KR" ? "상영관" : "THEATER"}
+						</S.LogoTitle>
 					</S.Logo>
 					<S.NavBar>
-						<li onClick={() => onGoPage("now-playing")}>상영작</li>
-						<li onClick={() => onGoPage("upcoming")}>개봉작</li>
-						<li onClick={() => onGoPage("top-rated")}>영화랭크</li>
+						<li onClick={() => onGoPage("now-playing")}>
+							{selectedLanguage === "ko-KR" ? "상영작" : "Now-Playing"}
+						</li>
+						<li onClick={() => onGoPage("upcoming")}>
+							{selectedLanguage === "ko-KR" ? "개봉작" : "Upcoming"}
+						</li>
+						<li onClick={() => onGoPage("top-rated")}>
+							{selectedLanguage === "ko-KR" ? "영화랭크" : "Top-Rated"}
+						</li>
 					</S.NavBar>
 				</S.LogoNavBar>
 				<S.SearchAvatar>
 					<SearchBar />
-					<S.Value>평가하기</S.Value>
+					<S.Value>
+						{selectedLanguage === "ko-KR" ? "평가하기" : "Rate It"}
+					</S.Value>
 					<S.Avatar>
 						<span>H</span>
 					</S.Avatar>

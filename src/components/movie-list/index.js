@@ -1,19 +1,15 @@
-import { Skeleton } from "@mui/material";
 import OneMovie from "components/one-movie";
-import { Suspense } from "react";
 import styled from "styled-components";
 import { wrapper } from "styles/common";
 
 const MovieList = ({ movies }) => {
 	return (
 		<S.Wrapper>
-			<Suspense fallback={<Skeleton width={200} height={369} />}>
-				<S.Container>
-					{movies.map(movie => (
-						<OneMovie movie={movie} />
-					))}
-				</S.Container>
-			</Suspense>
+			<S.Container>
+				{movies.map((movie, i) => (
+					<OneMovie key={i} movie={movie} />
+				))}
+			</S.Container>
 		</S.Wrapper>
 	);
 };

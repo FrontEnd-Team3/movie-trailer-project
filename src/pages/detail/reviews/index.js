@@ -30,7 +30,7 @@ const Reviews = ({ id }) => {
 		() => MovieApi.getMovieReviews(id, { page: 1 }),
 		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
 	);
-	console.log("reviews", data?.data?.results);
+	// console.log("reviews", data?.data?.results);
 
 	const reviewList = data?.data?.results;
 

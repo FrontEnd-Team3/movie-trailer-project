@@ -1,16 +1,22 @@
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "context/selectedLanguage";
 
 const SearchBar = () => {
 	const navigate = useNavigate();
 
+	const { selectedLanguage } = useLanguage();
 	return (
 		<div>
 			<S.Form>
 				<S.SearchInput
 					autocomplete="off"
-					placeholder="작품명을 검색해보세요."
+					placeholder={
+						selectedLanguage === "ko-KR"
+							? "작품명을 검색해보세요."
+							: "Search Movies You Want"
+					}
 				/>
 				<S.SearchButton onClick={() => navigate("/search")}>
 					<FiSearch size={16} />

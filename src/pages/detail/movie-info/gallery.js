@@ -31,7 +31,7 @@ const Gallery = ({ id }) => {
 		() => MovieApi.getMovieImages(id, { page: 1 }),
 		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
 	);
-	console.log("images", data?.data);
+	// console.log("images", data?.data);
 
 	const images = data?.data;
 
