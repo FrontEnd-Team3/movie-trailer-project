@@ -115,11 +115,11 @@ export const CacheUtils = {
 			queryConfig,
 		);
 	},
-	// cacheSearch: (criterion, query, page) => {
-	// 	return useQuery(
-	// 		["get/upcoming", criterion],
-	// 		() => MovieApi.getSearch(criterion, { page, query }),
-	// 		queryConfig,
-	// 	);
-	// },
+	cacheSearch: (criterion, query, page) => {
+		return useQuery(
+			[QUERYKEYS.MOVIE_SEARCH, criterion, query, page],
+			() => MovieApi.getSearch(criterion, { page, query }),
+			queryConfig,
+		);
+	},
 };

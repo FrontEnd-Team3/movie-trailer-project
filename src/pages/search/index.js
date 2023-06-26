@@ -1,47 +1,48 @@
-import { MovieApi } from "apis/movieApi";
-import Banner from "components/banner";
 import MovieList from "components/movie-list";
-import { useEffect, useState } from "react";
+import TopButton from "components/top-button";
+import useMovieList from "hooks/useMovieList";
+import { PARAMS } from "consts/PARAMS";
+import Banner from "components/banner";
 import { useSearchParams } from "react-router-dom";
+import MovieSlide from "components/movie-slide";
 
 const Search = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [searchMovies, setSearchMovies] = useState([]);
+	const criterion =
+		searchParams.get("criterion") === "undefined"
+			? "collection"
+			: searchParams.get("criterion");
+	const query =
+		searchParams.get("query") === "undefined" ? "" : searchParams.get("query");
+	const { data, isSuccess, isLoading, isFetching, pageNum, ref } = useMovieList(
+		PARAMS.MOVIE_SEARCH,
+		criterion,
+		query,
+	);
 
-	const getSearchMovies = async () => {
-		console.log("collection" || searchParams.get("criterion"));
-		const searchMoviesResult = await MovieApi.getSearch(
-			searchParams.get("criterion") === "undefined"
-				? "collection"
-				: searchParams.get("criterion"),
-			{
-				page: 1,
-				query:
-					searchParams.get("query") === "undefined"
-						? ""
-						: searchParams.get("query"),
-			},
-		);
-		setSearchMovies(searchMoviesResult.data.results);
-		console.log("asdfasdfasdf", searchMoviesResult);
-	};
+	if (isLoading && pageNum === 1) {
+		return <div>Loading...</div>;
+	}
+	if (!data && pageNum === 1) {
+		return <div>Data is not available</div>;
+	}
 
-	useEffect(() => {
-		getSearchMovies();
-	}, [searchMovies]);
-	// 과연 캐싱해야 할까? 그리고 해야 하면 refetch
-
-	// console.log("asdf", searchMoviesResult.data);
-
-	// if (searchMoviesResult.data) {
-	// 	searchMovies = searchMoviesResult.data.results;
-	// 	console.log("aaaa");
-	// }
 	return (
-		<>
+		<div>
+			{/* {data && <img src={`${image500}${data.results[0].backdrop_path}`} />} */}
+			{/* <br />
+			<br />
+			<br />
+			<br /> */}
+			<TopButton />
+			<MovieSlide movies={data?.results} />
 			<Banner title="SEARCH" />
-			<MovieList movies={searchMovies} />
-		</>
+			<MovieList movies={data?.results} />
+			{(isLoading || isFetching) && <div>Loading More...</div>}
+			{!isFetching && (
+				<div ref={ref}>{isSuccess && pageNum < data.total_pages}</div>
+			)}
+		</div>
 	);
 };
 export default Search;

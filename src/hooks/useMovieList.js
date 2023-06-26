@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import useInfiniteScroll from "./useInfiniteScroll";
 import useFetchMovies from "./useMoviesQuery";
 
-const useMovieList = queryKey => {
+const useMovieList = (queryKey, criterion = "movie", query = "") => {
 	const [pageNum, setPageNum] = useState(1);
 	const language = localStorage.getItem("selectedLanguage") || "ko-KR";
 	const {
@@ -11,7 +11,7 @@ const useMovieList = queryKey => {
 		isSuccess,
 		isLoading,
 		isFetching,
-	} = useFetchMovies(pageNum, language, queryKey);
+	} = useFetchMovies(pageNum, language, queryKey, criterion, query);
 	const [data, setData] = useState(null);
 
 	useEffect(() => {
