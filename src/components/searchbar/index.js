@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
+import { Select, MenuItem } from "@mui/material";
 
 const SearchBar = () => {
 	const navigate = useNavigate();
@@ -10,16 +11,18 @@ const SearchBar = () => {
 	const formRef = useRef();
 	const selectRef = useRef();
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [criterion, setCriterion] = useState("collection");
 
 	const searchRedirect = e => {
 		e.preventDefault();
-		searchParams.set("query", formRef.current.key.value);
+		searchParams.set("query", formRef.current.key.value || "");
 		navigate(`/search?${searchParams.toString()}`);
 	};
 
-	const selectRedirect = () => {
-		searchParams.set("criterion", selectRef.current.value);
-		navigate(`/search?${searchParams.toString()}`);
+	const selectRedirect = value => {
+		console.log(window.location);
+		searchParams.set("criterion", value || "collection");
+		navigate(window.location.pathname + "?" + searchParams.toString());
 	};
 
 	useEffect(() => {
@@ -36,7 +39,6 @@ const SearchBar = () => {
 					<S.SearchInput
 						autocomplete="off"
 						placeholder="검색어를 입력해보세요."
-						onChange={searchRedirect}
 						name="key"
 					/>
 					<S.SearchButton>
@@ -44,20 +46,26 @@ const SearchBar = () => {
 					</S.SearchButton>
 				</S.Form>
 			</div>
-			<S.SearchSelect
-				name="searchCriterion"
+			<Select
+				id="demo-select-small"
+				value={criterion}
 				ref={selectRef}
-				id=""
-				onChange={selectRedirect}
+				onChange={e => {
+					setCriterion(e.target.value);
+					selectRedirect(e.target.value);
+				}}
+				displayEmpty
+				inputProps={{ "aria-label": "Without label" }}
+				style={{ marginLeft: "10px", height: "35px", fontSize: "12px" }}
 			>
-				<SearchOption value="collection">Collection</SearchOption>
-				<SearchOption value="company">Company</SearchOption>
-				<SearchOption value="keyword">Keyword</SearchOption>
-				<SearchOption value="movie">Movie</SearchOption>
-				<SearchOption value="multi">Multi</SearchOption>
-				<SearchOption value="person">Person</SearchOption>
-				<SearchOption value="tv">TV</SearchOption>
-			</S.SearchSelect>
+				<MenuItem value="collection">Collection</MenuItem>
+				<MenuItem value="company">Company</MenuItem>
+				<MenuItem value="keyword">Keyword</MenuItem>
+				<MenuItem value="movie">Movie</MenuItem>
+				<MenuItem value="multi">Multi</MenuItem>
+				<MenuItem value="person">Person</MenuItem>
+				<MenuItem value="tv">TV</MenuItem>
+			</Select>
 		</>
 	);
 };
