@@ -7,16 +7,18 @@ import { useSearchParams } from "react-router-dom";
 import { CacheUtils } from "apis/movieApi";
 
 const DetailPage = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const MovieId = parseInt(searchParams.get("id"));
-	console.log("id", MovieId);
+	// const params = axiosInstance.defaults.params;
+	// console.log("params", params);
+	const [searchParams] = useSearchParams();
+	const MovieId = searchParams.get("id");
+	// console.log("id", MovieId);
 
 	let Target;
 	const TargetMovie = CacheUtils.cacheMovieDetail(MovieId, 1);
 	if (!TargetMovie.data) Target = null;
 	else {
 		if (TargetMovie.data) Target = TargetMovie.data.data;
-		console.log("target", Target);
+		// console.log("target", Target);
 	}
 
 	return (

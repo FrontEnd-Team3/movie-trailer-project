@@ -1,5 +1,7 @@
-import { axiosInstance } from "apis/@core";
-import { useEffect, useState } from "react";
+import { MovieApi } from "apis/movieApi";
+import { QUERYKEYS } from "consts/QUERYKEYS";
+import { useLanguage } from "context/selectedLanguage";
+import { useQuery } from "react-query";
 import styled from "styled-components";
 
 const Credits = ({ id }) => {
@@ -16,17 +18,27 @@ const Credits = ({ id }) => {
             - known_for_department로 filter 돌리기 (Acting)
             - order 값이 0, 1인 배우 가져오기 
 	*/
-	const [creditData, setCreditData] = useState(null);
+	// const [creditData, setCreditData] = useState(null);
 
-	const getCredits = async movie_id => {
-		const res = await axiosInstance.get(`/movie/${movie_id}/credits`);
-		console.log("credit", res.data);
-		setCreditData(res.data);
-	};
+	// const getCredits = async movie_id => {
+	// 	const res = await axiosInstance.get(`/movie/${movie_id}/credits`);
+	// 	// console.log("credit", res.data);
+	// 	setCreditData(res.data);
+	// };
 
-	useEffect(() => {
-		getCredits(id);
-	}, []);
+	// useEffect(() => {
+	// 	getCredits(id);
+	// }, []);
+
+	const { data } = useQuery(
+		[QUERYKEYS.MOVIE_CREDITS, id],
+		() => MovieApi.getMovieCredits(id, { page: 1 }),
+		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	);
+
+	// console.log("credit", data?.data);
+
+	const creditData = data?.data;
 
 	//배우
 	let FirstCast;
@@ -68,27 +80,37 @@ const Credits = ({ id }) => {
 		Writer = "unknown";
 	}
 
+	const { selectedLanguage } = useLanguage();
+
 	return (
 		creditData && (
-			<>
+			<CreditContainer>
 				<S.Container>
-					<S.Title>Director</S.Title>
+					<S.Title>
+						{selectedLanguage === "ko-KR" ? "감독" : "Director"}
+					</S.Title>
 					{Director}
 				</S.Container>
 				<S.Container>
-					<S.Title>Writer</S.Title>
+					<S.Title>{selectedLanguage === "ko-KR" ? "각본" : "Writer"}</S.Title>
 					{Writer}
 				</S.Container>
 				<S.Container>
-					<S.Title>Top Cast</S.Title>
+					<S.Title>
+						{selectedLanguage === "ko-KR" ? "출연" : "Top Cast"}
+					</S.Title>
 					{FirstCast}, {SecondCast && SecondCast}
 				</S.Container>
-			</>
+			</CreditContainer>
 		)
 	);
 };
 
 export default Credits;
+
+const CreditContainer = styled.div`
+	/* height: 250px; */
+`;
 
 const Container = styled.div`
 	display: flex;

@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { axiosInstance } from "apis/@core";
 import ReviewSlides from "./review-slide";
+import { useQuery } from "react-query";
+import { QUERYKEYS } from "consts/QUERYKEYS";
+import { MovieApi } from "apis/movieApi";
+import { useLanguage } from "context/selectedLanguage";
 
 const Reviews = ({ id }) => {
 	/*
@@ -9,44 +11,57 @@ const Reviews = ({ id }) => {
         - results 로 접근 후 map 돌리기 (뱌로 사용하지 않도록 주의)
 
 	*/
-	const [reviewList, setReviewList] = useState([]);
+	// const [reviewList, setReviewList] = useState([]);
 
-	const getReviews = async movie_id => {
-		const res = await axiosInstance.get(`/movie/${movie_id}/reviews`, {
-			params: { api_key: process.env.REACT_APP_TOKEN },
-		});
-		// console.log("credit", res.data);
-		setReviewList(res.data.results);
-		// console.log("reviews", res.data);
-	};
+	// const getReviews = async movie_id => {
+	// 	const res = await axiosInstance.get(`/movie/${movie_id}/reviews`, {
+	// 		params: { api_key: process.env.REACT_APP_TOKEN },
+	// 	});
+	// 	// console.log("credit", res.data);
+	// 	setReviewList(res.data.results);
+	// 	// console.log("reviews", res.data);
+	// };
 
-	useEffect(() => {
-		getReviews(id);
-	}, []);
+	// useEffect(() => {
+	// 	getReviews(id);
+	// }, []);
 
+	const { data } = useQuery(
+		[QUERYKEYS.MOVIE_REVIEWS, id],
+		() => MovieApi.getMovieReviews(id, { page: 1 }),
+		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	);
+	// console.log("reviews", data?.data?.results);
+
+	const reviewList = data?.data?.results;
+
+	const { selectedLanguage } = useLanguage();
 	return (
-		<>
+		<S.ReviewBox>
 			<S.ReviewsTop>
-				<S.Title>Reviews</S.Title>
-				<span>{reviewList.length}</span>
+				<S.Title>{selectedLanguage === "ko-KR" ? "리뷰" : "Reviews"}</S.Title>
+				<span>{reviewList?.length}</span>
 			</S.ReviewsTop>
-			{reviewList.length ? (
+			{reviewList?.length ? (
 				<ReviewSlides reviewList={reviewList} />
 			) : (
 				<S.NoReview>No Reviews</S.NoReview>
 			)}
-		</>
+		</S.ReviewBox>
 	);
 };
 
 export default Reviews;
+
+const ReviewBox = styled.div`
+	margin-top: 50px;
+`;
 
 const ReviewsTop = styled.div`
 	display: flex;
 	margin-left: 20px;
 	span {
 		margin-left: 10px;
-		margin-top: -3px;
 		font: 25px italic;
 		color: lightgray;
 	}
@@ -65,4 +80,4 @@ const NoReview = styled.div`
 	margin-left: 20px;
 `;
 
-const S = { ReviewsTop, Title, NoReview };
+const S = { ReviewBox, ReviewsTop, Title, NoReview };
