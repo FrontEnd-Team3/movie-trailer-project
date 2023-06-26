@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import { BsFillPlayFill } from "react-icons/bs";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 const OneSlide = ({ movie, slide }) => {
 	const imgUrl = "https://image.tmdb.org/t/p/w500";
 	const navigate = useNavigate();
@@ -26,10 +27,15 @@ const OneSlide = ({ movie, slide }) => {
 							<p>{movie.release_date.slice(5, 7)}</p>
 							<p>{movie.release_date.slice(8, 10)}</p>
 						</div>
-						<div>
+						<S.Play>
+							<div onClick={onClickNavigate}>
+								<BsFillPlayFill size={20} />
+							</div>
 							<div onClick={onClickNavigate}>play</div>
-							<div></div>
-						</div>
+							<div>
+								<AiOutlineExclamationCircle size={17} />
+							</div>
+						</S.Play>
 					</TextWrapper>
 				</S.Wrap>
 			</div>
@@ -37,6 +43,23 @@ const OneSlide = ({ movie, slide }) => {
 	);
 };
 export default OneSlide;
+
+const Play = styled.div`
+	display: flex;
+	position: relative;
+	bottom: 3px;
+	right: 4px;
+	cursor: pointer;
+	div:nth-child(2) {
+		position: relative;
+		left: 2px;
+	}
+	div:nth-child(3) {
+		position: relative;
+		left: 13px;
+		top: 2px;
+	}
+`;
 const TextWrapper = styled.div`
 	width: 360px;
 	height: 128px;
@@ -75,27 +98,7 @@ const TextWrapper = styled.div`
 		}
 	}
 `;
-const Title = styled.div`
-	position: relative;
-	width: 350px;
-	left: 15px;
-	bottom: 130px;
-	color: white;
-	font-size: 27px;
-	font-weight: bold;
-`;
 
-const Overview = styled.div`
-	width: 390px;
-	height: 50px;
-	position: relative;
-	text-overflow: ellipsis;
-	left: 15px;
-	bottom: 120px;
-	line-height: 1.8;
-	color: white;
-	font-size: 10px;
-`;
 const Wrap = styled.div`
 	width: 525px;
 	height: 290px;
@@ -118,4 +121,5 @@ const Img = styled.img`
 const S = {
 	Wrap,
 	Img,
+	Play,
 };
