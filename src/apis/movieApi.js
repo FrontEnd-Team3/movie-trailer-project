@@ -34,6 +34,14 @@ export const MovieApi = {
 	getMovieDetail(movie_id, params) {
 		return axiosInstance.get(`/movie/${movie_id}`, { params, video: true });
 	},
+	// /company/{movie_id}
+	getCompanyDetail(company_id, params) {
+		return axiosInstance.get(`/company/${company_id}`, { params });
+	},
+	// /tv/{tv_id}
+	getTvDetail(tv_id, params) {
+		return axiosInstance.get(`/tv/${tv_id}`, { params });
+	},
 	// /movie/upcoming
 	getUpcoming(params) {
 		return axiosInstance.get(`/movie/upcoming`, { params });
@@ -71,6 +79,20 @@ export const CacheUtils = {
 		return useQuery(
 			[QUERYKEYS.MOVIE_DETAIL, movie_id],
 			() => MovieApi.getMovieDetail(movie_id, { ...apiConfig, page }),
+			queryConfig,
+		);
+	},
+	cacheCompanyDetail: (company_id, page) => {
+		return useQuery(
+			[QUERYKEYS.COMPANY_DETAIL, company_id],
+			() => MovieApi.getCompanyDetail(company_id, { ...apiConfig, page }),
+			queryConfig,
+		);
+	},
+	cacheTvDetail: (tv_id, page) => {
+		return useQuery(
+			[QUERYKEYS.MOVIE_DETAIL, tv_id],
+			() => MovieApi.getTvDetail(tv_id, { ...apiConfig, page }),
 			queryConfig,
 		);
 	},
