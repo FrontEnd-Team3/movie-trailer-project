@@ -36,8 +36,8 @@ const PButton = styled.div`
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
-	position: fixed;
-	top: 240px;
+	position: relative;
+	top: 170px;
 	left: 220px;
 	cursor: pointer;
 	svg {
@@ -49,10 +49,11 @@ const NButton = styled.div`
 	background-color: #818181;
 	height: 50px;
 	width: 50px;
+	left: 1415px;
+	top: 100px;
 	border-radius: 50%;
-	position: fixed;
-	top: 240px;
-	right: 220px;
+	position: relative;
+
 	cursor: pointer;
 	svg {
 		color: aliceblue;
@@ -64,7 +65,7 @@ const Wrapper = styled.div`
 	width: 1080px;
 	display: flex;
 	margin: 0px auto;
-	margin-top: 60px;
+	margin-top: -50px;
 `;
 
 const S = {
