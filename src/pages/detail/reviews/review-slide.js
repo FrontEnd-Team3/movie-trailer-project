@@ -45,7 +45,7 @@ const PrevArrow = ({ style, onClick }) => {
 };
 
 const MultipleItems = ({ reviewList }) => {
-	console.log("reviewList", reviewList);
+	// console.log("reviewList", reviewList);
 
 	const settings = {
 		dots: true,
@@ -66,11 +66,11 @@ const MultipleItems = ({ reviewList }) => {
 					))}
 				</Slider>
 			) : (
-				<ReviewContainer>
+				<S.ReviewContainer>
 					{reviewList.map((review, i) => (
 						<OneReview key={i} review={review} />
 					))}
-				</ReviewContainer>
+				</S.ReviewContainer>
 			)}
 		</S.ReviewSliderBox>
 	);
@@ -84,7 +84,7 @@ const ReviewSliderBox = styled.div`
 
 const ReviewContainer = styled.div`
 	display: flex;
-	justify-content: center;
+	margin-left: -40px;
 `;
 
 const S = { ReviewSliderBox, ReviewContainer };

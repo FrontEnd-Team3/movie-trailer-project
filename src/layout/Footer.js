@@ -3,6 +3,10 @@ import { containerBasic, flexSpaceBetween, wrapper } from "styles/common";
 import { GoTriangleDown } from "react-icons/go";
 import { SiGithub } from "react-icons/si";
 import { RxNotionLogo } from "react-icons/rx";
+import { useEffect } from "react";
+import { axiosInstance } from "apis/@core";
+import { useQueryClient } from "react-query";
+import { useLanguage } from "context/selectedLanguage";
 
 const Footer = () => {
 	const onGoToGithub = () => {
@@ -15,28 +19,72 @@ const Footer = () => {
 			"https://gentle-tin-2c4.notion.site/Movie_Trailer_Site-44a200ab5feb4e4ea4f4644c5fc2759c";
 	};
 
+	// 언어 변경 로직
+	const { selectedLanguage, setSelectedLanguage } = useLanguage();
+	// 페이지 로드 시 로컬 스토리지에서 선택한 언어 값을 가져와 초기화
+	useEffect(() => {
+		const storedLanguage = localStorage.getItem("selectedLanguage");
+		if (storedLanguage) {
+			setSelectedLanguage(storedLanguage);
+			// localStorage에 저장된 값으로 param을 변경하여 새로고침 시에도 결과가 유지될 수 있게 하였음
+			axiosInstance.defaults.params.language = storedLanguage;
+		}
+	}, []);
+
+	// console.log("lan", selectedLanguage);
+
+	// onChange에서 받아온 값을 localStorage에 저장 + axiosInstance param의 language 값을 해당 값으로 변경
+	const handleSelectLanguage = e => {
+		const language = e.target.value;
+		setSelectedLanguage(language);
+		localStorage.setItem("selectedLanguage", language);
+		axiosInstance.defaults.params.language = language;
+		window.location.reload();
+	};
+
+	// 언어가 변경되면 전체 query 요청에 cache된 데이터를 무효화하여 새로 값을 불러올 수 있게 함
+	console.log("lan", selectedLanguage);
+	const queryClient = useQueryClient();
+	useEffect(() => {
+		queryClient.invalidateQueries();
+	}, [selectedLanguage]);
+
 	return (
 		<S.footerWrapper>
 			<S.Container>
 				<div>
 					<S.Ul>
-						<li>프로젝트 소개</li>
+						<li>
+							{selectedLanguage === "ko-KR"
+								? "프로젝트 소개"
+								: "Project Introduction"}
+						</li>
 						<li>Repository</li>
 						<li>Notion</li>
 					</S.Ul>
 					<S.Ul>
-						<li>주식회사 상영관</li>
-						<li>서울특별시 강남구 테헤란로 146 현익빌딩 3,4층</li>
+						<li>
+							{selectedLanguage === "ko-KR" ? "주식회사 상영관" : "Co. Theater"}
+						</li>
+						<li>
+							{selectedLanguage === "ko-KR"
+								? "서울특별시 강남구 테헤란로 146 현익빌딩 3,4층"
+								: "3rd and 4th Floor, Hyunik Building, 146, Teheran-ro, Gangnam-gu, Seoul, South Korea"}
+						</li>
 					</S.Ul>
 					<S.Ul>
 						<li>
-							copyright ⓒ <span>2023 by 상영관, Inc. All rights reserved.</span>
+							copyright ⓒ{" "}
+							<span>
+								2023 by {selectedLanguage === "ko-KR" ? "상영관" : "Theater"},
+								Inc. All rights reserved.
+							</span>
 						</li>
 					</S.Ul>
 				</div>
 				<S.RightSection>
 					<S.SelectBox>
-						<S.Select>
+						<S.Select value={selectedLanguage} onChange={handleSelectLanguage}>
 							<option value="ko-KR">한국어</option>
 							<option value="en-US">English</option>
 						</S.Select>

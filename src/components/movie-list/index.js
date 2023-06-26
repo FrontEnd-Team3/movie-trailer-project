@@ -1,4 +1,6 @@
+//movie-list
 import OneMovie from "components/one-movie";
+import TopButton from "components/top-button";
 import styled from "styled-components";
 import { wrapper } from "styles/common";
 
@@ -6,8 +8,9 @@ const MovieList = ({ movies }) => {
 	return (
 		<S.Wrapper>
 			<S.Container>
-				{movies.map(movie => (
-					<OneMovie movie={movie} />
+				<TopButton />
+				{movies?.map(movie => (
+					<OneMovie key={movie.id} movie={movie} />
 				))}
 			</S.Container>
 		</S.Wrapper>
