@@ -12,7 +12,6 @@ import { useLanguage } from "context/selectedLanguage";
 
 const Header = () => {
 	const navigate = useNavigate();
-
 	const onGoPage = endpoint => {
 		navigate(`movies/${endpoint}`);
 		window.location.reload();
