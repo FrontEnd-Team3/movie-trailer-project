@@ -1,20 +1,22 @@
 <p align="middle" >
   <img src="https://i.pinimg.com/564x/75/3a/e5/753ae5360acd3dd34f34ce3095168c00.jpg" width="400">
 </p>
-<h2 align="middle">Movie Trailer Site Project</h2>
-<p align="middle">영화 트레일러 오픈 API를 활용하여 영화 목록을 조회하고 사이트 구현하기 </p>
+<h1 align="middle">Movie Trailer Site Project</h1>
 </p><br>
 
 <div align="center">
   
   <h1>📑 프로젝트 소개 및 개요</h1> 
 
-  <p>내용 작성</p>
+ <p align="middle">영화 트레일러 오픈 API를 활용하여 영화 목록을 조회하고 사이트 구현하기 </p>
 
 </div><br>
 
 
 <h2>🔗 배포 링크</h2><br>
+
+<h2></h2>
+
 
 
 <h2>📂 폴더 구조</h2>
@@ -109,3 +111,19 @@
 
 <br>
 <h2>✔️ 요구사항 구현 내용</h2>
+
+1. react-qurey를 사용하여 데이터를 캐싱할 것
+2. 로딩 중에는 목록 가장 하단 부에 skelton UI를 나타낼 것
+3. 목록을 불러올 때는 react-query의 useInfinitQuery를 사용하여 무한 스크롤링으로 불러울 것
+4. 페이지 구성
+5. 스크롤 감지하여 ScrollUp button 표시되도록, 누를 시 최상단으로 스크롤 이동
+6. favicon을 이용하여 웹 표시 아이콘을 수정할 것
+7. 페이지 별 구현 사항
+8. 협업 시스템화 하기
+9. 구현 후 serverless 환경에서 배포하기
+
+
+<br>
+<h2>✔️ 깃허브 날짜별 정리</h2>
+
+
