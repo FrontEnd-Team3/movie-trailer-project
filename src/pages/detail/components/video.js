@@ -13,6 +13,8 @@ const Video = ({ id }) => {
 			video => video.name === "Official Trailer",
 		);
 
+		console.log("res", res.data.results);
+
 		// console.log("video", TrailerVideo);
 		if (TrailerVideo && TrailerVideo.site === "YouTube") {
 			setVideoLink(
