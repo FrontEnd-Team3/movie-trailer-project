@@ -5,6 +5,7 @@ import MovieSlide from "components/movie-slide";
 import TopButton from "components/top-button";
 import useMovieList from "hooks/useMovieList";
 import { PARAMS } from "consts/PARAMS";
+import Banner from "components/banner";
 
 const Main = () => {
 	const navigate = useNavigate();
@@ -34,7 +35,8 @@ const Main = () => {
 			<br />
 			<br /> */}
 			<TopButton />
-      <MovieSlide movies={data?.results} />
+			<MovieSlide movies={data?.results} />
+			<Banner title="POPULAR MOVIE" />
 			<MovieList movies={data?.results} />
 			{(isLoading || isFetching) && <div>Loading More...</div>}
 			{!isFetching && (

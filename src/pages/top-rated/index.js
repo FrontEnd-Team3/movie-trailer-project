@@ -2,6 +2,7 @@ import MovieList from "components/movie-list";
 import TopButton from "components/top-button";
 import useMovieList from "hooks/useMovieList";
 import { PARAMS } from "consts/PARAMS";
+import Banner from "components/banner";
 
 const TopRated = () => {
 	const { data, isSuccess, isLoading, isFetching, pageNum, ref } = useMovieList(
@@ -22,6 +23,7 @@ const TopRated = () => {
 			<br />
 			<br /> */}
 			<TopButton />
+			<Banner title="TOP RATED" />
 			<MovieList movies={data?.results} />
 			{(isLoading || isFetching) && <div>Loading More...</div>}
 			{!isFetching && (
