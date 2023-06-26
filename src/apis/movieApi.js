@@ -2,9 +2,10 @@
 import { QUERYKEYS } from "consts/QUERYKEYS";
 import { axiosInstance } from "./@core";
 import { useQuery } from "react-query";
+import axios from "axios";
 
 const apiConfig = {
-	language: "ko-KR",
+	// language: "ko-KR",
 };
 
 const queryConfig = { staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 };
@@ -32,8 +33,41 @@ export const MovieApi = {
 
 	// /movie/{movie_id}
 	getMovieDetail(movie_id, params) {
-		return axiosInstance.get(`/movie/${movie_id}`, { params, video: true });
+		return axiosInstance.get(`/movie/${movie_id}`, { params });
 	},
+
+	// /movie/{movie_id}/video
+	getMovieVideo(movie_id, params) {
+		return axiosInstance.get(`/movie/${movie_id}/videos`, { params });
+	},
+
+	// /movie/{movie_id}/credits
+	getMovieCredits(movie_id, params) {
+		return axiosInstance.get(`/movie/${movie_id}/credits`, { params });
+	},
+
+	// /movie/{movie_id}/reviews
+	getMovieReviews(movie_id, params) {
+		const Params = {
+			params: { api_key: process.env.REACT_APP_TOKEN, ...params },
+		};
+		return axios.get(
+			`https://api.themoviedb.org/3/movie/${movie_id}/reviews`,
+			Params,
+		);
+	},
+
+	// /movie/{movie_id}/images
+	getMovieImages(movie_id, params) {
+		const Params = {
+			params: { api_key: process.env.REACT_APP_TOKEN, ...params },
+		};
+		return axios.get(
+			`https://api.themoviedb.org/3/movie/${movie_id}/images`,
+			Params,
+		);
+	},
+
 	// /movie/upcoming
 	getUpcoming(params) {
 		return axiosInstance.get(`/movie/upcoming`, { params });
@@ -83,7 +117,7 @@ export const CacheUtils = {
 	},
 	cacheSearch: (criterion, query, page) => {
 		return useQuery(
-			[QUERYKEYS.MOVIE_SEARCH, criterion, query],
+			[QUERYKEYS.MOVIE_SEARCH, criterion, query, page],
 			() => MovieApi.getSearch(criterion, { page, query }),
 			queryConfig,
 		);

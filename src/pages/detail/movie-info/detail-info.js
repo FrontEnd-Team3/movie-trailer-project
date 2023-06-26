@@ -7,7 +7,7 @@ const DetailInfo = ({ target }) => {
 	// 개봉국가: production_countries[0]["iso_3166_1"]
 	// 장르: genres -> map 돌리기
 	// 평점: vote_average (vote_count)
-	console.log("country", target.production_countries);
+	// console.log("country", target.production_countries);
 
 	let ReleasedYear;
 	if (target.release_date) {
@@ -17,9 +17,13 @@ const DetailInfo = ({ target }) => {
 		ReleasedYear = "unknown";
 	}
 
+	// iso_3166_1: 국가 이름 축약형
 	let ReleastedCountry;
-	if (target.production_countries.length) {
-		// iso_3166_1: 국가 이름 축약형
+	if (
+		target &&
+		target.production_countries &&
+		target.production_countries.length
+	) {
 		ReleastedCountry = target.production_countries[0]["iso_3166_1"];
 	} else {
 		ReleastedCountry = "unknown";
@@ -39,15 +43,17 @@ const DetailInfo = ({ target }) => {
 					{/* <MovieGenre>Comedy</MovieGenre>
 					<MovieGenre>Drama</MovieGenre>
 					<MovieGenre>Fantasy</MovieGenre> */}
-					{target.genres.map((genre, i) => (
-						<S.MovieGenre key={i}>{genre.name}</S.MovieGenre>
-					))}
+					{target && target.genres
+						? target.genres.map((genre, i) => (
+								<S.MovieGenre key={i}>{genre.name}</S.MovieGenre>
+						  ))
+						: null}
 				</p>
 			</S.MovieDetailMiddle>
 			<S.StarRating>
-				<p>{"★".repeat(Math.floor(target.vote_average))}</p>
+				<p>{"★".repeat(Math.floor((target.vote_average / 2).toFixed(1)))}</p>
 				<span>
-					{target.vote_average}({target.vote_count})
+					{(target.vote_average / 2).toFixed(1)}({target.vote_count})
 				</span>
 			</S.StarRating>
 		</>

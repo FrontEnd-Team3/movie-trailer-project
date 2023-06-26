@@ -1,38 +1,37 @@
 import styled from "styled-components";
-import { axiosInstance } from "apis/@core";
-import { useEffect, useState } from "react";
+import useFetchMovies from "hooks/useMoviesQuery";
+import { useLanguage } from "context/selectedLanguage";
+import { PARAMS } from "consts/PARAMS";
 
 const Video = ({ id }) => {
-	// 1. Video
-	const [videoLink, setVideoLink] = useState(null);
 
-	const getVideo = async movie_id => {
-		const res = await axiosInstance.get(`/movie/${movie_id}/videos`);
+	const { selectedLanguage } = useLanguage();
+	const { data } = useFetchMovies(
+		1,
+		selectedLanguage,
+		`${id}/${PARAMS.MOVIE_VIDEOS}`,
+	);
 
-		const TrailerVideo = res.data.results.find(
-			video => video.name === "Official Trailer",
-		);
+	let OfficialTrailer;
+	if (data && data.results) {
+		OfficialTrailer = data.results.find(video => {
+			// console.log("video.type:", video.type);
+			return video.type === "Trailer";
+		});
+	}
 
-		console.log("res", res.data.results);
-
-		// console.log("video", TrailerVideo);
-		if (TrailerVideo && TrailerVideo.site === "YouTube") {
-			setVideoLink(
-				// autoplay: 페이지 접속 시 동영상 자동재생
-				// mute: chrome에서 자동재생 막는 현상 방지
-				`https://www.youtube.com/embed/${TrailerVideo.key}?autoplay=1&mute=1`,
-			);
-		}
-	};
-
-	useEffect(() => {
-		getVideo(id);
-	}, []);
+	// console.log("T", OfficialTrailer);
+	// autoplay: 페이지 접속 시 동영상 자동재생
+	// mute: chrome에서 자동재생 막는 현상 방지
+	let VideoLink;
+	if (OfficialTrailer) {
+		VideoLink = `https://www.youtube.com/embed/${OfficialTrailer.key}?autoplay=1&mute=1`;
+	}
 
 	return (
-		videoLink && (
+		VideoLink && (
 			<S.VideoContainer>
-				<S.VideoPlayer src={videoLink} allowFullScreen></S.VideoPlayer>
+				<S.VideoPlayer src={VideoLink} allowFullScreen></S.VideoPlayer>
 			</S.VideoContainer>
 		)
 	);
