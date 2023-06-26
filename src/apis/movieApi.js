@@ -34,14 +34,6 @@ export const MovieApi = {
 	getMovieDetail(movie_id, params) {
 		return axiosInstance.get(`/movie/${movie_id}`, { params, video: true });
 	},
-	// /company/{movie_id}
-	getCompanyDetail(company_id, params) {
-		return axiosInstance.get(`/company/${company_id}`, { params });
-	},
-	// /tv/{tv_id}
-	getTvDetail(tv_id, params) {
-		return axiosInstance.get(`/tv/${tv_id}`, { params });
-	},
 	// /movie/upcoming
 	getUpcoming(params) {
 		return axiosInstance.get(`/movie/upcoming`, { params });
@@ -82,20 +74,6 @@ export const CacheUtils = {
 			queryConfig,
 		);
 	},
-	cacheCompanyDetail: (company_id, page) => {
-		return useQuery(
-			[QUERYKEYS.COMPANY_DETAIL, company_id],
-			() => MovieApi.getCompanyDetail(company_id, { ...apiConfig, page }),
-			queryConfig,
-		);
-	},
-	cacheTvDetail: (tv_id, page) => {
-		return useQuery(
-			[QUERYKEYS.MOVIE_DETAIL, tv_id],
-			() => MovieApi.getTvDetail(tv_id, { ...apiConfig, page }),
-			queryConfig,
-		);
-	},
 	cacheUpcomingMovie: page => {
 		return useQuery(
 			[QUERYKEYS.MOVIE_UPCOMING],
@@ -103,11 +81,11 @@ export const CacheUtils = {
 			queryConfig,
 		);
 	},
-	// cacheSearch: (criterion, query, page) => {
-	// 	return useQuery(
-	// 		["get/upcoming", criterion],
-	// 		() => MovieApi.getSearch(criterion, { page, query }),
-	// 		queryConfig,
-	// 	);
-	// },
+	cacheSearch: (criterion, query, page) => {
+		return useQuery(
+			[QUERYKEYS.MOVIE_SEARCH, criterion, query],
+			() => MovieApi.getSearch(criterion, { page, query }),
+			queryConfig,
+		);
+	},
 };
