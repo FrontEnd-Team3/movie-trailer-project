@@ -3,6 +3,7 @@ export const PARAMS = {
 	MOVIE_NOWPLAYING: "now_playing",
 	MOVIE_UPCOMING: "upcoming",
 	MOVIE_TOPRATED: "top_rated",
+	MOVIE_SEARCH: "search",
 	MOVIE_VIDEOS: "videos",
 	MOVIE_CREDITS: "credits",
 	MOVIE_SIMILAR: "similar",

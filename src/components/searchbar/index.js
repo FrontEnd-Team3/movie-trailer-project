@@ -6,14 +6,13 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Select, MenuItem } from "@mui/material";
 
-
 const SearchBar = () => {
 	const navigate = useNavigate();
 	const { selectedLanguage } = useLanguage();
 	const formRef = useRef();
 	const selectRef = useRef();
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [criterion, setCriterion] = useState("collection");
+	const [criterion, setCriterion] = useState("movie");
 
 	const searchRedirect = e => {
 		e.preventDefault();
@@ -23,7 +22,7 @@ const SearchBar = () => {
 
 	const selectRedirect = value => {
 		console.log(window.location);
-		searchParams.set("criterion", value || "collection");
+		searchParams.set("criterion", value || "movie");
 		navigate(window.location.pathname + "?" + searchParams.toString());
 	};
 
@@ -64,13 +63,10 @@ const SearchBar = () => {
 				inputProps={{ "aria-label": "Without label" }}
 				style={{ marginLeft: "10px", height: "35px", fontSize: "12px" }}
 			>
-				<MenuItem value="collection">Collection</MenuItem>
-				<MenuItem value="company">Company</MenuItem>
 				<MenuItem value="keyword">Keyword</MenuItem>
 				<MenuItem value="movie">Movie</MenuItem>
 				<MenuItem value="multi">Multi</MenuItem>
 				<MenuItem value="person">Person</MenuItem>
-				<MenuItem value="tv">TV</MenuItem>
 			</Select>
 		</>
 	);

@@ -4,7 +4,6 @@ import { useLanguage } from "context/selectedLanguage";
 import { PARAMS } from "consts/PARAMS";
 
 const Video = ({ id }) => {
-
 	const { selectedLanguage } = useLanguage();
 	const { data } = useFetchMovies(
 		1,
