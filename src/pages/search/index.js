@@ -1,4 +1,5 @@
 import { MovieApi } from "apis/movieApi";
+import Banner from "components/banner";
 import MovieList from "components/movie-list";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -36,6 +37,11 @@ const Search = () => {
 	// 	searchMovies = searchMoviesResult.data.results;
 	// 	console.log("aaaa");
 	// }
-	return <MovieList movies={searchMovies} />;
+	return (
+		<>
+			<Banner title="SEARCH" />
+			<MovieList movies={searchMovies} />
+		</>
+	);
 };
 export default Search;

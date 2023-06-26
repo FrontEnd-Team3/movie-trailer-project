@@ -21,7 +21,7 @@ export default MovieList;
 
 const Wrapper = styled.div`
 	${wrapper}
-	margin: 60px 0;
+	margin: 10px 0 60px 0;
 `;
 
 const Container = styled.div`
