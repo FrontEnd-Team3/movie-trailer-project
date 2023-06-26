@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLanguage } from "context/selectedLanguage";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Select, MenuItem } from "@mui/material";
-import { useLanguage } from "context/selectedLanguage";
+
 
 const SearchBar = () => {
 	const navigate = useNavigate();
 	const { selectedLanguage } = useLanguage();
-
 	const formRef = useRef();
 	const selectRef = useRef();
 	const [searchParams, setSearchParams] = useSearchParams();

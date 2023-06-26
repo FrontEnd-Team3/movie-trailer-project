@@ -4,41 +4,13 @@ import { useLanguage } from "context/selectedLanguage";
 import { PARAMS } from "consts/PARAMS";
 
 const Video = ({ id }) => {
-	// 1. Video
-	// const [VideoLink, setVideoLink] = useState();
-	// const getVideo = async () => {
-	// 	const res = await axiosInstance.get(`/movie/${id}/videos`);
 
-	// 	const TrailerVideo = res.data.results.find(
-	// 		video => video.name === "Official Trailer",
-	// 	);
-
-	// 	// console.log("video", TrailerVideo);
-	// 	if (TrailerVideo && TrailerVideo.site === "YouTube") {
-	// 		setVideoLink(
-	// 			// autoplay: 페이지 접속 시 동영상 자동재생
-	// 			// mute: chrome에서 자동재생 막는 현상 방지
-	// 			`https://www.youtube.com/embed/${TrailerVideo.key}?autoplay=1&mute=1`,
-	// 		);
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	getVideo();
-	// }, []);
-
-	// const { data } = useQuery(
-	// 	[QUERYKEYS.MOVIE_VIDEO, id],
-	// 	() => MovieApi.getMovieVideo(id, { page: 1 }),
-	// 	{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
-	// );
 	const { selectedLanguage } = useLanguage();
 	const { data } = useFetchMovies(
 		1,
 		selectedLanguage,
 		`${id}/${PARAMS.MOVIE_VIDEOS}`,
 	);
-	// console.log("link", data?.results);
 
 	let OfficialTrailer;
 	if (data && data.results) {
