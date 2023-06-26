@@ -29,8 +29,10 @@ const useMovieList = queryKey => {
 
 	const loadMore = useCallback(
 		debounce(() => {
+			if (data && data.results.length >= 60) return;
 			setPageNum(prevPageNum => prevPageNum + 1);
 		}, 400),
+		[data],
 	);
 
 	const { ref } = useInfiniteScroll(isLoading, isFetching, loadMore);
