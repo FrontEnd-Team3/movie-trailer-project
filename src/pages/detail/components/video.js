@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { MovieApi } from "apis/movieApi";
-import { QUERYKEYS } from "consts/QUERYKEYS";
-import { useQuery } from "react-query";
+import useFetchMovies from "hooks/useMoviesQuery";
+import { useLanguage } from "context/selectedLanguage";
+import { PARAMS } from "consts/PARAMS";
 
 const Video = ({ id }) => {
 	// 1. Video
@@ -27,24 +27,30 @@ const Video = ({ id }) => {
 	// 	getVideo();
 	// }, []);
 
-	const { data } = useQuery(
-		[QUERYKEYS.MOVIE_VIDEO, id],
-		() => MovieApi.getMovieVideo(id, { page: 1 }),
-		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	// const { data } = useQuery(
+	// 	[QUERYKEYS.MOVIE_VIDEO, id],
+	// 	() => MovieApi.getMovieVideo(id, { page: 1 }),
+	// 	{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	// );
+	const { selectedLanguage } = useLanguage();
+	const { data } = useFetchMovies(
+		1,
+		selectedLanguage,
+		`${id}/${PARAMS.MOVIE_VIDEOS}`,
 	);
-
-	// console.log("link", data?.data?.results);
+	// console.log("link", data?.results);
 
 	let OfficialTrailer;
-	if (data && data.data && data.data.results) {
-		OfficialTrailer = data.data.results.find(video => {
+	if (data && data.results) {
+		OfficialTrailer = data.results.find(video => {
 			// console.log("video.type:", video.type);
 			return video.type === "Trailer";
 		});
 	}
 
 	// console.log("T", OfficialTrailer);
-
+	// autoplay: 페이지 접속 시 동영상 자동재생
+	// mute: chrome에서 자동재생 막는 현상 방지
 	let VideoLink;
 	if (OfficialTrailer) {
 		VideoLink = `https://www.youtube.com/embed/${OfficialTrailer.key}?autoplay=1&mute=1`;

@@ -9,11 +9,15 @@ const useFetchMovies = (page, language, endpoint) => {
 		return response.data;
 	}
 
-	return useQuery(["movies", page], () => fetchMovies({ language, page }), {
-		keepPreviousData: true,
-		staleTime: 0,
-		refetchOnWindowFocus: false,
-		retry: false,
-	});
+	return useQuery(
+		[`movies/${endpoint}`, page],
+		() => fetchMovies({ language, page }),
+		{
+			keepPreviousData: true,
+			staleTime: 0,
+			refetchOnWindowFocus: false,
+			retry: false,
+		},
+	);
 };
 export default useFetchMovies;
