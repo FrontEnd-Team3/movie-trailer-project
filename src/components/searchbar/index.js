@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Select, MenuItem } from "@mui/material";
 
-
 const SearchBar = () => {
 	const navigate = useNavigate();
 	const { selectedLanguage } = useLanguage();
