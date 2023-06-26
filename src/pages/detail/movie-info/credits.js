@@ -1,7 +1,6 @@
-import { MovieApi } from "apis/movieApi";
-import { QUERYKEYS } from "consts/QUERYKEYS";
+import { PARAMS } from "consts/PARAMS";
 import { useLanguage } from "context/selectedLanguage";
-import { useQuery } from "react-query";
+import useFetchMovies from "hooks/useMoviesQuery";
 import styled from "styled-components";
 
 const Credits = ({ id }) => {
@@ -30,15 +29,20 @@ const Credits = ({ id }) => {
 	// 	getCredits(id);
 	// }, []);
 
-	const { data } = useQuery(
-		[QUERYKEYS.MOVIE_CREDITS, id],
-		() => MovieApi.getMovieCredits(id, { page: 1 }),
-		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	// const { data } = useQuery(
+	// 	[QUERYKEYS.MOVIE_CREDITS, id],
+	// 	() => MovieApi.getMovieCredits(id, { page: 1 }),
+	// 	{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	// );
+	const { selectedLanguage } = useLanguage();
+	const { data } = useFetchMovies(
+		1,
+		selectedLanguage,
+		`${id}/${PARAMS.MOVIE_CREDITS}`,
 	);
+	// console.log("credit", data);
 
-	// console.log("credit", data?.data);
-
-	const creditData = data?.data;
+	const creditData = data;
 
 	//배우
 	let FirstCast;
@@ -79,8 +83,6 @@ const Credits = ({ id }) => {
 	} else {
 		Writer = "unknown";
 	}
-
-	const { selectedLanguage } = useLanguage();
 
 	return (
 		creditData && (

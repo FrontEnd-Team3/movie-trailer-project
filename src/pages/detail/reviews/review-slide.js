@@ -45,7 +45,7 @@ const PrevArrow = ({ style, onClick }) => {
 };
 
 const MultipleItems = ({ reviewList }) => {
-	console.log("reviewList", reviewList);
+	// console.log("reviewList", reviewList);
 
 	const settings = {
 		dots: true,

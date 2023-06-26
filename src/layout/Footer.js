@@ -39,6 +39,7 @@ const Footer = () => {
 		setSelectedLanguage(language);
 		localStorage.setItem("selectedLanguage", language);
 		axiosInstance.defaults.params.language = language;
+		window.location.reload();
 	};
 
 	// 언어가 변경되면 전체 query 요청에 cache된 데이터를 무효화하여 새로 값을 불러올 수 있게 함

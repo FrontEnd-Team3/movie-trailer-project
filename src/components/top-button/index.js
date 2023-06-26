@@ -1,6 +1,8 @@
+import { useLanguage } from "context/selectedLanguage";
 import styled from "styled-components";
 
 const TopButton = () => {
+	const { selectedLanguage } = useLanguage();
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
@@ -8,7 +10,11 @@ const TopButton = () => {
 		});
 	};
 
-	return <StyledTopButton onClick={scrollToTop}>Top</StyledTopButton>;
+	return (
+		<StyledTopButton onClick={scrollToTop}>
+			{selectedLanguage === "ko-KR" ? "위로" : "Top"}
+		</StyledTopButton>
+	);
 };
 
 export default TopButton;

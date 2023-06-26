@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import ReviewSlides from "./review-slide";
-import { useQuery } from "react-query";
-import { QUERYKEYS } from "consts/QUERYKEYS";
-import { MovieApi } from "apis/movieApi";
 import { useLanguage } from "context/selectedLanguage";
+import useFetchMoviesWithoutLanguage from "hooks/useFetchMoviesWithoutLan";
+import { PARAMS } from "consts/PARAMS";
 
 const Reviews = ({ id }) => {
 	/*
@@ -26,10 +25,14 @@ const Reviews = ({ id }) => {
 	// 	getReviews(id);
 	// }, []);
 
-	const { data } = useQuery(
-		[QUERYKEYS.MOVIE_REVIEWS, id],
-		() => MovieApi.getMovieReviews(id, { page: 1 }),
-		{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	// const { data } = useQuery(
+	// 	[QUERYKEYS.MOVIE_REVIEWS, id],
+	// 	() => MovieApi.getMovieReviews(id, { page: 1 }),
+	// 	{ staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 4 },
+	// );
+	const { data } = useFetchMoviesWithoutLanguage(
+		1,
+		`${id}/${PARAMS.MOVIE_REVIEWS}`,
 	);
 	// console.log("reviews", data?.data?.results);
 
