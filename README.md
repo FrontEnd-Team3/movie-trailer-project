@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+<p align="middle" >
+  <img src="https://i.pinimg.com/564x/75/3a/e5/753ae5360acd3dd34f34ce3095168c00.jpg" width="400">
+</p>
+<h2 align="middle">Movie Trailer Site Project</h2>
+<p align="middle">영화 트레일러 오픈 API를 활용하여 영화 목록을 조회하고 사이트 구현하기 </p>
+</p><br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  
+  <h1>📑 프로젝트 소개 및 개요</h1> 
 
-## Available Scripts
+  <p>내용 작성</p>
 
-In the project directory, you can run:
+</div><br>
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h2>🔗 배포 링크</h2><br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+<h2>📂 폴더 구조</h2>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+├─apis
+│  └─@core.js
+│  └─MovieApi.js
+├─components
+│  └─movie-list
+│    └─index.js
+│  └─one-movie
+│    └─index.js
+│  └─searchbar
+│    └─index.js
+│  └─top-button
+│    └─index.js
+├─consts
+│  └─PARAMS.js
+│  └─QUERYKEYS.js
+├─context
+│  └─selectedLanguage.js
+├─hooks
+│  └─useInfiniteScroll.js
+│  └─useMovieList.js
+│  └─useMoviesQuery.js
+├─layout
+│  └─Footer.js
+│  └─Header.js
+│  └─index.js
+├─pages
+│  └─detail
+│    └─components
+│      └─video.js
+│    └─img
+│    └─movie-info
+│      └─credits.js
+│      └─detail-info.js
+│      └─gallery.js
+│      └─index.js
+│      └─plot.js
+│    └─recomendation
+│      └─index.js
+│    └─review
+│      └─index.js
+│      └─one-review.js
+│      └─review-slide.js
+│  └─main
+│    └─index.js
+│  └─now-playing
+│    └─index.js
+│  └─search
+│    └─index.js
+│  └─top-rated
+│    └─index.js
+│  └─upcoming
+│    └─index.js
+├─routes
+│  └─routing.js
+└─style
+│  └─common.js
+│  └─global.js
+│  └─theme.js
+```
 
-### `npm run build`
+<br>
+<h2>👨‍👩‍👦‍👦 팀원</h2> 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+|Front-end|Front-end|Front-end|Front-end|Front-end|Front-end|Front-end|
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| <img src="https://github.com/FrontEnd-Team3/movie-trailer-project/assets/123865139/663c4b42-dc55-4e95-8f02-c0424c1f92ec" width="118"> | <img src="https://github.com/FrontEnd-Team3/movie-trailer-project/assets/123865139/b537f778-e73e-4464-81be-eaf09f05ad7f" width="118"> | <img src="https://github.com/FrontEnd-Team3/movie-trailer-project/assets/123865139/a6e966c2-bf34-4ece-91c6-6efeb5ac681b" width="118"> | <img src="https://github.com/FrontEnd-Team3/movie-trailer-project/assets/123865139/9964f6f1-b6b0-4d20-af3a-13c7c76f5816" width="118"> | <img src="https://github.com/FrontEnd-Team3/movie-trailer-project/assets/123865139/fd4e0419-20fd-4531-b7ff-6248b14a9261" width="118"> | <img src="https://github.com/KIT-Frontend-Team1/pair1-Git-Issue-Project/assets/123865139/f7bb64fc-2d77-4bd0-9825-5823f73d5977" width="118"> | <img src="https://github.com/FrontEnd-Team3/movie-trailer-project/assets/123865139/4b3bc122-1b2d-48ef-be6a-af3b8042ce4f" width="118"> |
+|[지성경](https://github.com/zivivle)|[오현우](https://github.com/ohwphil)|[박희수](https://github.com/Sueddd)|[심재원](https://github.com/GrayHound0801)|[함정우](https://github.com/JeongwooHam)|[김예슬](https://github.com/yesoryeseul)|[고승용](https://github.com/seungyonggo)|
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
+<h2>⚙️ 사용 기술 스택</h2>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img src="https://github.com/FrontEnd-Team3/movie-trailer-project/assets/123865139/047754be-f577-4e61-b63b-2968a03b095e" width="800">
 
-### `npm run eject`
+<br><br>
+<h2>☑️ 커밋 컨벤션</h2>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+|   Type   | Description                   |
+| :------: | ----------------------------- |
+|   feat   | Add a new feature             |
+|   fix    | Fix the bug                   |
+|  design  | UI design changes such as CSS |
+|  style   | code formatting               |
+| refactor | Refactoring the code          |
+|   docs   | Modify the document           |
+|  chore   | etc.                          |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br>
+<h2>✔️ 요구사항 구현 내용</h2>
